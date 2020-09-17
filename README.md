@@ -23,7 +23,28 @@ Finding yard sales within a person’s community is difficult.  There are so man
 
 ## Wireframes, Database Schema, Trello Board
 - [Wireframes](https://drive.google.com/file/d/1Y0JtEfZbdVu0JDSFJVm7kVPttaOfigEy/view?usp=sharing)
-![Wireframes](https://drive.google.com/file/d/1zo7aEcRc9KVjm2du2TFEW3tOrUlu0dB5/view?usp=sharing)
 - [Database](https://drive.google.com/file/d/1he7zQJFxxy03hh9nUXJ1RWeE0xQNzVUV/view?usp=sharing)
-![Database](https://drive.google.com/file/d/15ifIWZIgp21hfvPSyqtzEwGdfPDCz3AY/view?usp=sharing)
 - [Trello board](https://trello.com/b/OkSAmxaB/yard-sales-app-project-4)
+
+## MOSCOW METHOD
+
+### Must have
+- CRUD functionality for yard sale listings and user profile
+- User can register and login 
+- Ability to search/browse yard sales based on search parameters such as city, state and/or zip code
+- Ability to add/delete yard sales to profile (as someone interested in attending)
+- Ability to add/update/delete yard sale postings as a registered user
+- Ability to update user profile info such as email address, default zip code, etc.
+
+### Should have
+- The ability to view all yard sale listings on a mapping service
+- The ability to upload pictures to listings created
+
+### Could have
+- A reminder notification method of some kind that alerts users of upcoming saved yard sales
+- A “saved” count viewable to the posted to gage interest
+- A share to social media feature
+- An “ask the poster/seller a question” feature
+
+### Won’t have
+- A payment solution for advanced purchases
