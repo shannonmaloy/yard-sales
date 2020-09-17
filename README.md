@@ -14,12 +14,16 @@ Finding yard sales within a person’s community is difficult.  There are so man
 - User can access the application and search upcoming yard sales
 - User can filter upcoming yard sales by a filter option such as zip code or city, state.
 - User can view upcoming yard sales in a list or on a map 
-- User can sign up and becoming a Member
+- User can sign up and become a Member
 - Member can save upcoming yard sales for future reference
 - Member can post/update/delete an upcoming yard sale they are having.
 - Posted yard sales will have an start and expiration
 - Posted yard sales should optionally display pictures of items
 - User should be able to easily use app on mobile device
+
+## Planned Technologies To Be Used
+- Frontend: React.js, Database: PostgreSQL, Backend: TBD - either Ruby on Rails or Express/Node
+- APIs:  Potentially Google Maps API, 
 
 ## Wireframes, Database Schema, Trello Board
 - [Wireframes](https://drive.google.com/file/d/1Y0JtEfZbdVu0JDSFJVm7kVPttaOfigEy/view?usp=sharing)
