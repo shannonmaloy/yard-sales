@@ -3,7 +3,9 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import axios from 'axios'
 import Home from "./Home"
 import Dashboard from "./Dashboard"
-
+import Sales from "./Sales"
+import Map from "./Map"
+import Header from "./Header"
 
 export default class App extends Component {
   constructor() {
@@ -17,6 +19,9 @@ export default class App extends Component {
 
     this.handleLogin = this.handleLogin.bind(this)
     this.handleLogout = this.handleLogout.bind(this)
+  }
+  componentDidMount() {
+    this.checkLoginStatus()  
   }
 
   checkLoginStatus() {
@@ -39,9 +44,7 @@ export default class App extends Component {
       })
   }
 
-  componentDidMount() {
-    this.checkLoginStatus()  
-  }
+  
 
   handleLogin(data) {
     this.setState({
@@ -62,10 +65,11 @@ export default class App extends Component {
     return (
       <div className='app'>
         <BrowserRouter>
+          <Header />
           <Switch>
             <Route exact path={"/"} render={props => (<Home {...props} loggedInStatus={this.state.loggedInStatus} handleLogin={this.handleLogin} handleLogout={this.handleLogout}/>)} />
             <Route exact path={"/dashboard"} render={props => (<Dashboard {... props} loggedInStatus={this.state.loggedInStatus}/>)} />
-
+            <Route exact path={"/sales"} render={() =><Sales/>} />
           </Switch>
         
         </BrowserRouter>
