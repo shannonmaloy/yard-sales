@@ -16,7 +16,7 @@ export default class App extends Component {
     }
 
     this.handleLogin = this.handleLogin.bind(this)
-
+    this.handleLogout = this.handleLogout.bind(this)
   }
 
   checkLoginStatus() {
@@ -50,12 +50,20 @@ export default class App extends Component {
     })
   }
 
+  handleLogout() {
+    this.setState({
+      loggedInStatus: "Not_Logged_In",
+      user: {}
+    })
+  }
+
+
   render() {
     return (
       <div className='app'>
         <BrowserRouter>
           <Switch>
-            <Route exact path={"/"} render={props => (<Home {...props} loggedInStatus={this.state.loggedInStatus} handleLogin={this.handleLogin}/>)} />
+            <Route exact path={"/"} render={props => (<Home {...props} loggedInStatus={this.state.loggedInStatus} handleLogin={this.handleLogin} handleLogout={this.handleLogout}/>)} />
             <Route exact path={"/dashboard"} render={props => (<Dashboard {... props} loggedInStatus={this.state.loggedInStatus}/>)} />
 
           </Switch>
