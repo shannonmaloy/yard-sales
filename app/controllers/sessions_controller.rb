@@ -15,7 +15,10 @@ class SessionsController < ApplicationController
                 user: user
             }
         else
-            render json: {status: 401}
+            render json: {
+                status: 401,
+                message: "Username or Password Incorrect.  Try Again"
+            }
         end 
     end
 

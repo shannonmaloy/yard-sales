@@ -6,7 +6,7 @@ html {
 *::after,
 *::before {
     margin: 0;
-    padding: 0;
+    padding: 10px;
     box-sizing: inherit;
     font-family: 'montserrat';
 }
@@ -25,4 +25,5 @@ body {
     margin-top: 2rem;
     display: grid;
     justify-items: center;
+    border: 2px blue solid;
 }
