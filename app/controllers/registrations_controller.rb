@@ -4,6 +4,10 @@ class RegistrationsController < ApplicationController
             email: params['user']['email'], 
             password: params['user']['password'],
             password_confirmation: params['user']['password_confirmation'],
+            address: params['user']['address'], 
+            city: params['user']['city'], 
+            state: params['user']['state'], 
+            zip: params['user']['zip']
         )
         if user
             session[:user_id] = user.id
