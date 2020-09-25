@@ -5,7 +5,6 @@ import axios from 'axios'
 const Sales = () => {
   const [data, setData] = useState(null);
   useEffect(() => {
-    console.log("Line 7)")
     axios.get('http://localhost:3001/sales')
       .then(res => {
         setData(res.data.sales)

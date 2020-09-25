@@ -1,29 +1,80 @@
-html {
-    font-size: 62.5%; // 1rem is 10px
-}
+.App {
+    text-align: center;
+  }
+  
+  .App-logo {
+    height: 40vmin;
+    pointer-events: none;
+  }
+  
+  @media (prefers-reduced-motion: no-preference) {
+    .App-logo {
+      animation: App-logo-spin infinite 20s linear;
+    }
+  }
+  
+  .sale {
+    border: 2px black dashed;
+    width: 20%;
+    
+    margin: 10px;
+    
+  }
+  #map {
+    max-width: 600px;
+    padding: 20px;
+    margin: 20px;
+    border: 4px solid black;
+    
+  }
+  .sale-container {
+    display: flex;
+    border: solid 2px blue; 
+    flex-direction: row;
+    box-sizing: content-box;
+    
+  }
+  .App-header {
+    background-color: #282c34;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+    border: 2px solid blue;
+  }
+  
+  .App-link {
+    color: #61dafb;
+  }
 
-*,
-*::after,
-*::before {
-    margin: 0;
-    padding: 10px;
-    box-sizing: inherit;
-    font-family: 'montserrat';
-}
+  .nav-container {
+      border: solid red 2px;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+  }
 
-body {
-    overflow-x: hidden;
-    font-weight: normal;
-
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
-    -webkit-tap-highlight-color: transparent;
+  .nav-container ul{
+    border: solid green 2px;
+    display: flex;
+    flex-direction: row;
+    font-size: 24px;
+    list-style-type: none;
+    
 }
-
-.app {
-    margin-top: 2rem;
-    display: grid;
-    justify-items: center;
-    border: 2px blue solid;
+  
+.nav-container li{
+    padding: 0 15px;
 }
+  @keyframes App-logo-spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  

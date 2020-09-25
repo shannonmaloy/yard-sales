@@ -6,17 +6,20 @@ const libraries = ["geometry"]
 const mapContainerStyle = {
   height: "50vh",
   width: "50vw",
+  clickableIcons: false
 }
 const center = {
   lat: 33.860649,
   lng: -84.339790,
 }
 
+const options = { InfoWindowOptions: {pixelOffset: (20, 120) } }
+
 export default function Map(props) {
   const [selectedSale, setSelectedSale] = useState(null)
   const [fitBounds, setFitBounds] = useState(null)
   const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
+    googleMapsApiKey: "AIzaSyCXK1LZV_v4jMsN0dqc4ooplYep9-lT64g",
     libraries,
   })
 
@@ -41,7 +44,7 @@ export default function Map(props) {
         {props.mapData.map((saleMarker) => (
           
           <Marker
-            // animation={google.maps.Animation.DROP}
+            animation={0}
             key={saleMarker.id}
             icon={{
               url: "/house-favicon.png",
@@ -52,6 +55,7 @@ export default function Map(props) {
               lat: parseFloat(saleMarker.lat),
               lng: parseFloat(saleMarker.lng),
             }}
+            
             onClick={() => {
               setSelectedSale(saleMarker)
             }}
@@ -62,10 +66,12 @@ export default function Map(props) {
         
         {selectedSale && (
           <InfoWindow
+          options={{pixelOffset: new google.maps.Size(0,-20)}}
             position={{
               lat: parseFloat(selectedSale.lat),
               lng: parseFloat(selectedSale.lng),
             }}
+            
             // anchor={selectedSale.id}
             // pixelOffset={(120,20)}
             onCloseClick={() => {
