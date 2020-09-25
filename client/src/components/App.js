@@ -7,7 +7,7 @@ import Sales from "./Sales"
 import Map from "./Map"
 import Header from "./Header"
 import Footer from "./Footer"
-
+import PostSale from "./PostSale"
 
 console.log(process.env.REACT_APP_GOOGLE_MAPS_API_KEY)
 
@@ -74,7 +74,7 @@ export default class App extends Component {
             <Route exact path={"/"} render={props => (<Home {...props} loggedInStatus={this.state.loggedInStatus} handleLogin={this.handleLogin} handleLogout={this.handleLogout}/>)} />
             <Route exact path={"/dashboard"} render={props => (<Dashboard {...props} loggedInStatus={this.state.loggedInStatus} user={this.state.user}/>)} />
             <Route exact path={"/sales"} render={() => <Sales />} />
-            <Route exact path={"/sales/post"} render={() =><Sales/>} />
+            <Route exact path={"/sales/post"} render={() =><PostSale/>} />
           </Switch>
         <Footer />
         </BrowserRouter>
