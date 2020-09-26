@@ -53,10 +53,22 @@ const [selectedPlace, setSelectedPlace] = useState(null);
     console.log(mapRef.current)
   }
 
-  function handleCenterChanged() {
+  const handleCenterChanged = () => {
     if (!mapRef.current) return
-    const newPos = mapRef.current.getCenter().toJSON()
-    console.log(newPos)
+    const newPos = mapRef.current.getBounds().toJSON()
+
+     console.log(newPos)
+  }
+
+  function geocodeAddress(saleMarker) {
+    let address = `${saleMarker.address}, ${saleMarker.city},${saleMarker.state} ${saleMarker.zip}` 
+    console.log("Hello", address)
+    const geocoder = new google.maps.Geocoder()
+    geocoder.geocode({ address: address }, (results, status) => {
+      console.log("Hello geocoded address", status, "Then ", results[0].geometry.location.toJSON())
+      
+    })
+    
   }
 
 const renderMap = () => {
@@ -71,7 +83,7 @@ const renderMap = () => {
         zoom={zoom} 
         center={center}
         onClick={e => console.log(e.latLng.toJSON())}
-        onCenterChanged={handleCenterChanged}
+        onCenterChanged={(handleCenterChanged)}
          
       >
         {/* child components go here - Marker, InfoWindow */}
@@ -89,9 +101,8 @@ const renderMap = () => {
               lat: parseFloat(saleMarker.lat),
               lng: parseFloat(saleMarker.lng),
             }}
-            // onClick={() => {
-            //   setSelectedSale(saleMarker)
-            // }}
+            
+            onClick={e => geocodeAddress(saleMarker)}
             onMouseOver={() => {
               setSelectedSale(saleMarker)
             }}
