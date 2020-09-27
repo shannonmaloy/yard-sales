@@ -9,6 +9,7 @@ export default class FindASale extends Component {
         super(props)
         this.state = {
             searchBarInput: "",
+            searchRadius: 5,
             data: null,
             filteredData: null,
             geocodedSearchBarInput: null,
@@ -35,7 +36,7 @@ export default class FindASale extends Component {
         event.preventDefault()
         this.setState({ [event.target.name]: event.target.value })
         this.geocodeSearchBarInput(this.state.searchBarInput)
-    
+        
         console.log("THIS from FindSale", this)
         console.log(this.state)
         
@@ -62,9 +63,9 @@ export default class FindASale extends Component {
         this.state.data.map(place => {
             console.log("Sale ID: ", place.id, "Lat/Lng: ", { lat: parseFloat(place.lat), lng: parseFloat(place.lng) }, "Geocode Result:", this.state.geocodedSearchBarInput.lat)
             let distanceInMiles = this.distance(place.lat, place.lng, this.state.geocodedSearchBarInput.lat, this.state.geocodedSearchBarInput.lng)
-            console.log("Distance from center: ", distanceInMiles, this.state.searchBarInput)
-            if (distanceInMiles < 10) {
-                console.log("Inside 66")
+            // console.log("Distance from center: ", distanceInMiles, this.state.searchBarInput)
+            if (distanceInMiles < this.state.searchRadius) {
+                // console.log("Inside 66")
                 filteredDataArr.push(place)
             }
         });
@@ -92,14 +93,15 @@ export default class FindASale extends Component {
         
         return (
             <div>
-<LoadScript
-        googleMapsApiKey="AIzaSyCXK1LZV_v4jMsN0dqc4ooplYep9-lT64g"
-      ></LoadScript>
+            <LoadScript
+            googleMapsApiKey="AIzaSyCXK1LZV_v4jMsN0dqc4ooplYep9-lT64g"
+            ></LoadScript>
                 <form onSubmit={this.handleSubmit}>
-                <input type="text" name="searchBarInput" placeholder="Enter an address, city, or ZIP code" value={this.state.name} onChange={this.handleChange} />
-                <button type="submit">Search</button>
+                <input type="text" name="searchBarInput" placeholder="Enter an address, city, or ZIP code" value={this.state.searchBarInput} onChange={this.handleChange} />
+                <input type="number" name="searchRadius" placeholder="Enter radius in miles" value={this.state.searchRadius} onChange={this.handleChange} />
+                    <button type="submit">Search</button>
                 </form>
-                {/* <Sales searchBarInput={this.state} /> */}
+                {<Sales dataProps={this.state} />}
                 {<Example dataProps={this.state}/>}
             </div>
         )

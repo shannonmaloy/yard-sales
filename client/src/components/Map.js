@@ -7,7 +7,7 @@ const Map = (props) => {
   const [selectedSale, setSelectedSale] = useState(null)
   const [center, setCenter] = useState({  lat: 33.860649, lng: -84.339790 });
   const [zoom, setZoom] = useState(10);
-  const [searchDistance, setSearchDistance] = useState(3)
+  const [searchDistance, setSearchDistance] = useState(34)
   
   const mapRef = useRef(null);
   const filteredSearch = []
@@ -38,7 +38,7 @@ const Map = (props) => {
       
   */
   const searchResultsAndFitBoundMap = map => {
-    
+    console.log("Props in Maps:", props)
     const bounds = new google.maps.LatLngBounds();
     props.mapData.map(place => {
       console.log("Sale ID: ", place.id, "Lat/Lng: ", { lat: parseFloat(place.lat), lng: parseFloat(place.lng) })
@@ -71,11 +71,11 @@ const Map = (props) => {
     
   }
 
-  const handleCenterChanged = () => {
-    if (!mapRef.current) return
-      const newPos = mapRef.current.getBounds().toJSON()
-      console.log(newPos)
-  }
+  // const handleCenterChanged = () => {
+  //   if (!mapRef.current) return
+  //     const newPos = mapRef.current.getBounds().toJSON()
+  //     console.log(newPos)
+  // }
 
   function geocodeAddress(saleMarker) {
     let address = `${saleMarker.address}, ${saleMarker.city},${saleMarker.state} ${saleMarker.zip}` 
@@ -100,7 +100,7 @@ const Map = (props) => {
             zoom={zoom} 
             center={center}
             onClick={e => console.log(e.latLng.toJSON())}
-            onCenterChanged={(handleCenterChanged)}
+            // onCenterChanged={(handleCenterChanged)}
             clickableIcons={false}
           >
             {/* child components go here - Marker, InfoWindow */}
