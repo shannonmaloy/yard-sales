@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 import Map from './Map'
 import axios from 'axios'
 
-const Sales = () => {
+const Sales = (props) => {
   const [data, setData] = useState(null);
+  console.log("Sales is updating...")
   useEffect(() => {
     axios.get('http://localhost:3001/sales')
       .then(res => {
@@ -14,7 +15,7 @@ const Sales = () => {
   return (
     <div className="sale-container">
       {console.log(data)}
-      {data ? (<Map mapData={data} />) : <p>Loading Google Map</p>}
+      {data ? (<Map mapData={data} propsFromFindSale={props}/>) : <p>Loading Google Map</p>}
       {data ? (
         data.map((sale) => {
           return (
