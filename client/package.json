@@ -8,8 +8,7 @@
     "build": "cross-env NODE_ENV=production webpack --config webpack/prod.config.js --progress --display-error-details --color",
     "heroku-postbuild": "cd client && npm install && npm run build && npm run deploy",
     "precommit": "eslint src",
-    "prod": "NODE_ENV=production node server.js",
-    "deploy": "cp -a ./build/. ../public/"
+    "prod": "NODE_ENV=production node server.js"
   },
   "repository": {
     "type": "git",
