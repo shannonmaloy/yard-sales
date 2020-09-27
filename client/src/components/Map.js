@@ -8,9 +8,9 @@ const Map = (props) => {
   const [center, setCenter] = useState({  lat: 33.860649, lng: -84.339790 });
   const [zoom, setZoom] = useState(10);
   const [searchDistance, setSearchDistance] = useState(34)
-  
+  const [filteredSearch, setFilteredSearch] = useState(null)
   const mapRef = useRef(null);
-  const filteredSearch = []
+  const filteredSearchArr = []
   const libraries = ["geometry"]
   //Google Map options setup 
   const mapContainerStyle = {
@@ -47,10 +47,11 @@ const Map = (props) => {
       if( distanceInMiles < searchDistance) {
         bounds.extend({  lat: parseFloat(place.lat), lng: parseFloat(place.lng) })
         console.log(bounds.toJSON());
-        filteredSearch.push(place)
+        filteredSearchArr.push(place)
       }
     });
     mapRef.current.fitBounds(bounds)
+    setFilteredSearch(filteredSearchArr)
   };
 
   //Haversine Formula for calculating distance between two lat/lng coordinates
