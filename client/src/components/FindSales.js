@@ -17,7 +17,7 @@ export default class FindASale extends Component {
         }
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleChange = this.handleChange.bind(this)
-       
+        this.geocodeSearchBarInput = this.geocodeSearchBarInput.bind(this)
     }
 
     getData = () => {

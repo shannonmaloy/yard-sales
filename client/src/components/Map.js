@@ -19,10 +19,10 @@ const Map = (props) => {
     clickableIcons: false
   }
   //File path for map cluster icons
-  const markerClusterOptions = {
-    imagePath:
-      'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'
-  } 
+  // const markerClusterOptions = {
+  //   imagePath:
+  //     'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'
+  // } 
   //Script to load API key.  API key is URL restricted
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: "AIzaSyCXK1LZV_v4jMsN0dqc4ooplYep9-lT64g"
@@ -104,7 +104,7 @@ const Map = (props) => {
             clickableIcons={false}
           >
             {/* child components go here - Marker, InfoWindow */}
-            <MarkerClusterer options={markerClusterOptions} minimumClusterSize={3}>
+            <MarkerClusterer  minimumClusterSize={3}>
               {(clusterer) =>
                 filteredSearch.map((saleMarker) => (
               <Marker
