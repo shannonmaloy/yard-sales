@@ -42,7 +42,7 @@ const Map = (props) => {
   const searchResultsAndFitBoundMap = map => {
   
    
-    (props.dataProps.bounds && mapRef.current.fitBounds(props.dataProps.bounds))
+    (props.dataProps.bounds ? mapRef.current.fitBounds(props.dataProps.bounds) : console.log(props.dataProps.bounds))
     console.log("Props in Maps:", props)
   }
 
@@ -60,15 +60,14 @@ const Map = (props) => {
   //     console.log(newPos)
   // }
 
-  //This is where the magic happens!  This funciton renders the Map, map Markers, map MarkerClusters, and InfoWindows
+  //This is where the magic happens!  This function renders the Map, map Markers, map MarkerClusters, and InfoWindows
   const renderMap = () => {
     
       return (
         <div>
           {console.log("Hello before map render", props)}
           <GoogleMap
-            // onLoad={alert("LOADED")}
-            onLoad={handleLoad}
+            
             id="map"
             mapContainerStyle={mapContainerStyle}
             zoom={props.dataProps.zoom} 
@@ -76,6 +75,7 @@ const Map = (props) => {
             onClick={e => console.log(e.latLng.toJSON())}
             // onCenterChanged={(handleCenterChanged)}
             clickableIcons={false}
+            onLoad={handleLoad}
           >
             {/* child components go here - Marker, InfoWindow */}
             <MarkerClusterer  minimumClusterSize={3}>

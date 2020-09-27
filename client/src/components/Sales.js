@@ -19,10 +19,9 @@ const Sales = (props) => {
           return (
             <div className="sale" key={sale.id}>
                   <h3>{sale.address}, {sale.city}, {sale.state} {sale.zip}</h3>
-                  <p>{sale.description}</p>
+                  <p>{sale.id} - {sale.description}</p>
                   <p>Date & Time: {sale.date}</p>
               <p>{sale.start_time} to {sale.end_time}</p>
-              {/* <p>Lat: {sale.lat} Long: {sale.lng}</p> */}
             </div>
           );
         })

@@ -15,7 +15,7 @@ export default class FindASale extends Component {
             filteredSales: null,
             geocodedSearchBarInput: null,
             center: { lat: 33.860649, lng: -84.339790 },
-            zoom: 10,
+            zoom: 11,
             bounds: null,
         }
         this.handleSubmit = this.handleSubmit.bind(this)
