@@ -5,13 +5,15 @@ const Map = (props) => {
   
   const [clickedLatLng, setClickedLatLng] = useState(null);
   const [selectedSale, setSelectedSale] = useState(null)
-  const [center, setCenter] = useState({  lat: 33.860649, lng: -84.339790 });
-  const [zoom, setZoom] = useState(10);
-  const [searchDistance, setSearchDistance] = useState(34)
-  const [filteredSearch, setFilteredSearch] = useState(null)
   const mapRef = useRef(null);
-  const filteredSearchArr = []
+  
   const libraries = ["geometry"]
+  let salesData = null
+  if (props.dataProps.filteredSales) {
+   salesData = props.dataProps.filteredSales
+  } else salesData = props.dataProps.allSales
+  console.log(salesData, "DATADADADA")
+
   //Google Map options setup 
   const mapContainerStyle = {
     height: "50vh",
@@ -27,7 +29,7 @@ const Map = (props) => {
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: "AIzaSyCXK1LZV_v4jMsN0dqc4ooplYep9-lT64g"
   })
-  console.log("Search Distance", searchDistance)
+  
   if (loadError) return "Error"
   if (!isLoaded) return "Loading Map!"
   
@@ -38,31 +40,10 @@ const Map = (props) => {
       
   */
   const searchResultsAndFitBoundMap = map => {
-    console.log("Props in Maps:", props)
-    const bounds = new google.maps.LatLngBounds();
-    props.mapData.map(place => {
-      console.log("Sale ID: ", place.id, "Lat/Lng: ", { lat: parseFloat(place.lat), lng: parseFloat(place.lng) })
-      let distanceInMiles = distance(place.lat, place.lng, center.lat, center.lng)
-      console.log("Distance from center: ", distanceInMiles, parseFloat(searchDistance))
-      if( distanceInMiles < searchDistance) {
-        bounds.extend({  lat: parseFloat(place.lat), lng: parseFloat(place.lng) })
-        console.log(bounds.toJSON());
-        filteredSearchArr.push(place)
-      }
-    });
-    mapRef.current.fitBounds(bounds)
-    setFilteredSearch(filteredSearchArr)
-  };
-
-  //Haversine Formula for calculating distance between two lat/lng coordinates
-  function distance(lat1, lng1, lat2, lng2) {
-    const p = 0.017453292519943295    // Math.PI / 180 convert degrees to radians
-    const c = Math.cos;
-    let a = 0.5 - c((lat2 - lat1) * p)/2 + 
-            c(lat1 * p) * c(lat2 * p) * 
-            (1 - c((lng2 - lng1) * p)) / 2
   
-    return 7917.6 * Math.asin(Math.sqrt(a)); // 7917.6 = 2 * R; R = 3958.8 radius of Earth in miles
+   
+    (props.dataProps.bounds && mapRef.current.fitBounds(props.dataProps.bounds))
+    console.log("Props in Maps:", props)
   }
 
   function handleLoad(map) {
@@ -72,34 +53,26 @@ const Map = (props) => {
     
   }
 
+  //Possible Future feature - on map change reload data to current bounds
   // const handleCenterChanged = () => {
   //   if (!mapRef.current) return
   //     const newPos = mapRef.current.getBounds().toJSON()
   //     console.log(newPos)
   // }
 
-  function geocodeAddress(saleMarker) {
-    let address = `${saleMarker.address}, ${saleMarker.city},${saleMarker.state} ${saleMarker.zip}` 
-    console.log("Hello", address)
-    const geocoder = new google.maps.Geocoder()
-    geocoder.geocode({ address: address }, (results, status) => {
-      console.log("Hello geocoded address", status, "Then ", results[0].geometry.location.toJSON())
-      
-    })
-    
-  }
   //This is where the magic happens!  This funciton renders the Map, map Markers, map MarkerClusters, and InfoWindows
   const renderMap = () => {
     
       return (
         <div>
+          {console.log("Hello before map render", props)}
           <GoogleMap
             // onLoad={alert("LOADED")}
             onLoad={handleLoad}
             id="map"
             mapContainerStyle={mapContainerStyle}
-            zoom={zoom} 
-            center={center}
+            zoom={props.dataProps.zoom} 
+            center={props.dataProps.center}
             onClick={e => console.log(e.latLng.toJSON())}
             // onCenterChanged={(handleCenterChanged)}
             clickableIcons={false}
@@ -107,7 +80,7 @@ const Map = (props) => {
             {/* child components go here - Marker, InfoWindow */}
             <MarkerClusterer  minimumClusterSize={3}>
               {(clusterer) =>
-                filteredSearch.map((saleMarker) => (
+                salesData.map((saleMarker) => (
               <Marker
                 options={{animation: google.maps.Animation.DROP}}
                 key={saleMarker.id}
@@ -119,7 +92,7 @@ const Map = (props) => {
                   lat: parseFloat(saleMarker.lat),
                   lng: parseFloat(saleMarker.lng),
                 }}
-                onClick={e => geocodeAddress(saleMarker)}
+                onClick={e => console.log("MODAL FUNCTION HERE")}
                 onMouseOver={() => {
                   setSelectedSale(saleMarker)
                 }}
