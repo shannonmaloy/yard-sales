@@ -56,7 +56,7 @@ const Map = (props) => {
     console.log("Map here", props)
     console.log("WHA:LJ", mapRef.current)
     searchResultsAndFitBoundMap(map)
-    props.mapBounds(map)
+    
   }
   console.log("H:LKJL:KJ:LJK")
   //Possible Future feature - on map change reload data to current bounds
@@ -133,14 +133,14 @@ const Map = (props) => {
         
 
             {/* Position of the user's map click */}
-            {clickedLatLng && (
+            {/* {clickedLatLng && (
               <h3>
                 You clicked: {clickedLatLng.lat}, {clickedLatLng.lng}
               </h3>
-            )}
+            )} */}
 
             {/* Position of the user's map click */}
-            {selectedSale && <h3>Selected Marker: {selectedSale.address}</h3>}
+            {/* {selectedSale && <h3>Selected Marker: {selectedSale.address}</h3>} */}
         </div>
       )
       }

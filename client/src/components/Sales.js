@@ -18,9 +18,9 @@ const Sales = (props) => {
         salesData.map((sale) => {
           return (
             <div className="sale" key={sale.id}>
-                  <h3>{sale.address}, {sale.city}, {sale.state} {sale.zip}</h3>
+                  <h3>User ID:{sale.user_id} - {sale.address}, {sale.city}, {sale.state} {sale.zip}</h3>
                   <p>{sale.id} - {sale.description}</p>
-                  <p>Date & Time: {sale.date}</p>
+              <p>Date & Time: {sale.date} </p>
               <p>{sale.start_time} to {sale.end_time}</p>
             </div>
           );

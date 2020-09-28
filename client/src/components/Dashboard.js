@@ -1,7 +1,7 @@
 import React from 'react'
 
 const Dashboard = props => {
-    console.log(props)
+    console.log("Hello from dashboard:" , props)
     return (
         <div>
             <div> {props.user.email} - Dashboard COMPONENT</div>

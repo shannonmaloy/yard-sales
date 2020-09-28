@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
-// import Example from '../components/Example'
+
 
 export default class Header extends Component {
     constructor(props) {
@@ -25,8 +25,7 @@ export default class Header extends Component {
         return (
             <nav className="nav-container">
                 <ul className="nav-links">
-                    
-                    {/* <Example /> */}
+                   
                     <li><Link to='/sales'>Find A Sale</Link></li>
                     <li><Link to='/sales/post'>Post A Sale</Link></li>
                     <li><h1><Link to='/'>YARD SALE</Link></h1></li>

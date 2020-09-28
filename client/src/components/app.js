@@ -75,7 +75,7 @@ export default class App extends Component {
             <Route exact path={"/"} render={props => (<Home {...props} loggedInStatus={this.state.loggedInStatus} handleLogin={this.handleLogin} handleLogout={this.handleLogout}/>)} />
             <Route exact path={"/dashboard"} render={props => (<Dashboard {...props} loggedInStatus={this.state.loggedInStatus} user={this.state.user}/>)} />
             <Route exact path={"/sales"} render={() => <FindSales />} />
-            <Route exact path={"/sales/post"} render={() =><PostSale/>} />
+            <Route exact path={"/sales/post"} render={() => <PostSale user={this.state.user}/>} />
           </Switch>
         <Footer />
         </BrowserRouter>

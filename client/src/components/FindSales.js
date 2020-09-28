@@ -1,11 +1,11 @@
-import React, { Component, useRef } from 'react'
+import React, { Component} from 'react'
 import Sales from "./Sales"
 import Map from "./Map"
 import axios from 'axios'
 import Example from "./Example"
-import {LoadScript} from '@react-google-maps/api'
-
+import {Autocomplete, LoadScript} from '@react-google-maps/api'
 export default class FindASale extends Component {
+    
     constructor(props) {
         super(props)
         this.state = {
@@ -17,13 +17,13 @@ export default class FindASale extends Component {
             center: { lat: 33.860649, lng: -84.339790 },
             zoom: 11,
             bounds: null,
-            mapBounds: null,
+           
         }
         
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleChange = this.handleChange.bind(this)
         this.geocodeSearchBarInput = this.geocodeSearchBarInput.bind(this)
-        this.mapBounds = this.mapBounds.bind(this)
+        
     }
     
     getData = () => {
@@ -37,12 +37,6 @@ export default class FindASale extends Component {
             }) 
     }
     
-    mapBounds (map)  {
-        console.log(map)
-        
-        
-    }
-
     handleSubmit(event) {
         event.preventDefault()
         this.setState({
@@ -89,14 +83,13 @@ export default class FindASale extends Component {
             let distanceInMiles = this.distance(place.lat, place.lng, this.state.geocodedSearchBarInput.lat, this.state.geocodedSearchBarInput.lng)
             console.log("Distance from center: ", distanceInMiles, this.state.searchRadius)
             if (distanceInMiles < this.state.searchRadius) {
-                console.log("Inside 66")
                 bounds.extend({  lat: parseFloat(place.lat), lng: parseFloat(place.lng) })
                 console.log(bounds.toJSON());
                 filteredSalesArr.push(place)
             }
         })
-        console.log("BOUNDS BEFORE", this.state.bounds)
-        // mapRef.current.fitBounds(bounds)
+        
+        
         this.setState({
             filteredSales: filteredSalesArr,
             bounds: bounds
@@ -116,18 +109,21 @@ export default class FindASale extends Component {
         
         return (
             <div>
-            <LoadScript
-            googleMapsApiKey="AIzaSyCXK1LZV_v4jMsN0dqc4ooplYep9-lT64g"
-            ></LoadScript>
+                <LoadScript
+                libraries = {["places"]}
+                googleMapsApiKey="AIzaSyCXK1LZV_v4jMsN0dqc4ooplYep9-lT64g"
+            >
+                
                 <form onSubmit={this.handleSubmit}>
                 <input type="text" name="searchBarInput" placeholder="Enter an address, city, or ZIP code" value={this.state.searchBarInput} onChange={this.handleChange} />
                 <input type="number" name="searchRadius" placeholder="Enter radius in miles" value={this.state.searchRadius} onChange={this.handleChange} />
                     <button type="submit">Search</button>
                 </form>
-                {this.state.filteredSales ? (<Map mapBounds={this.mapBounds} dataProps={this.state}/>) : (this.state.allSales ? (<Map mapBounds={this.mapBounds} dataProps={this.state}/>) : (<p>Loading Google Map</p>))}
+                {this.state.filteredSales ? (<Map dataProps={this.state}/>) : (this.state.allSales ? (<Map dataProps={this.state}/>) : (<p>Loading Google Map</p>))}
 
                 {<Sales dataProps={this.state}/>}
-                {/* {<Example dataProps={this.state}/>} */}
+                    {/* {<Example dataProps={this.state}/>} */}
+            </LoadScript>
             </div>
         )
     }
