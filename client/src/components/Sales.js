@@ -13,15 +13,17 @@ const Sales = (props) => {
 
       {salesData ? (
         salesData.map((sale) => {
-
+          {console.log(sale.start_time)}
           return (
+            
             <div className="sale" key={sale.id}>
-              <p>{sale.user_id} {sale.address}, {sale.city}, {sale.state} {sale.zip}</p>
-                  <p>{sale.description}</p>
-              <p>Date & Time: {moment(sale.date).format("MM-DD-YYYY")} </p>
-              <p>{moment(sale.start_time).format("hh:mmA")} to {moment(sale.end_time).format("hh:mmA")}</p>
+              <p className="sale-list-address1">{sale.address}</p> 
+              <p className="sale-list-address2">{sale.city}, {sale.state} {sale.zip}</p>
+              <p className="sale-list-date">Date: {moment(sale.date).format("MM-DD-YYYY")}</p>
+              <p className="sale-list-time">Time: {moment(sale.start_time).format("hh:mmA")} to {moment(sale.end_time).format("hh:mmA")}</p>
+              <p className="sale-list-description">{sale.description}</p>
             </div>
-          );
+          )
         })
       ) : <p>Loading Search Results...</p>}
     </div>

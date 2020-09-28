@@ -119,10 +119,11 @@ const Map = (props) => {
                   setSelectedSale(null)
                 }}>
                 <div>
-                  <h3>{selectedSale.address}, {selectedSale.city}, {selectedSale.state} {selectedSale.zip}</h3>
-                  <h4></h4>
-                  <p>{selectedSale.description}</p>
-                  <p>Date & Time: {moment(selectedSale.date).format("MM-DD-YYYY")} - {moment(selectedSale.start_time).format("hh:mmA")} to {moment(selectedSale.end_time).format("hh:mmA")}</p>
+                  <p className="sale-window-address1">{selectedSale.address}</p>
+                  <p className="sale-window-address2">{selectedSale.city}, {selectedSale.state} {selectedSale.zip}</p>
+                  <p className="sale-window-date">Date: {moment(selectedSale.date).format("MM-DD-YYYY")} </p>
+                  <p className="sale-window-time">Time: {moment(selectedSale.start_time).format("hh:mmA")} to {moment(selectedSale.end_time).format("hh:mmA")}</p>
+                  <p className="sale-window-description">{selectedSale.description}</p>
                 </div>
               </InfoWindow>)}
             

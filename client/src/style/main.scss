@@ -183,6 +183,7 @@
      box-sizing: border-box;
    }
    .sales-list-container {
+    font-family: 'Montserrat', sans-serif;
      background-color: #8FC1E3;
      border-left: 2px solid #5085A5;
      border-right: 2px solid #5085A5;
@@ -196,6 +197,7 @@
    }
 
    .sale-container {
+    font-family: 'Montserrat', sans-serif;
      display: flex;
      flex-direction: column;
      justify-content: center;
@@ -204,9 +206,116 @@
    }
 
    .sale {
+    font-family: 'Montserrat', sans-serif;
      border: 2px solid #31708E;
      padding: 5px 20px;
      margin: 5px 15px;
      background-color: #8FC1E3;
    }
+
+   .sale-list-address1 {
+    font-family: 'Montserrat', sans-serif;
+     font-weight: 900;
+     font-size: 25px;
+     margin: 0 auto;
+     padding: 0;
+     text-align: center;
+     height: 30px;
+   }
+
+   .sale-list-address2 {
+    font-family: 'Montserrat', sans-serif;
+     font-weight: 900;
+     font-size: 25px;
+     margin: 0 auto;
+     padding: 4px 0;
+     text-align: center;
+     height: 30px;
+     border-bottom: 2px solid #31708E;
+   }
+
+   .sale-list-date {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+    margin: 5px auto 0 auto ;
+   }
+
+   .sale-list-time {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+    margin: 0 auto 5px auto ;
+    border-bottom: 2px solid #31708E;
+   }
   
+   .sale-list-description {
+    font-weight: 500;
+    font-size: 15px;
+   }
+
+   .sale-window-address1 {
+    font-family: 'Montserrat', sans-serif;
+     font-weight: 900;
+     font-size: 15px;
+     margin: 0 auto;
+     padding: 0;
+     text-align: center;
+     height: 17px;
+   }
+
+   .sale-window-address2 {
+    font-family: 'Montserrat', sans-serif;
+     font-weight: 900;
+     font-size: 15px;
+     margin: 0 auto;
+     padding: 4px 0;
+     text-align: center;
+     height: 17px;
+     border-bottom: 2px solid #31708E;
+   }
+
+   .sale-window-date {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 12px;
+    margin: 5px auto 0 auto  ;
+   }
+
+   .sale-window-time {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 12px;
+    margin: 5px auto ;
+    border-bottom: 2px solid #31708E;
+   }
+  
+   .sale-window-description {
+    font-weight: 500;
+    font-size: 15px;
+   }
+
+   .hero {
+    font-family: 'Montserrat', sans-serif;
+    display: flex;
+    height: 100%;
+    font-weight: 900;
+    font-size: 15px;
+    
+    padding: 4px 0;
+    text-align: center;
+    align-self: center;
+    border: 2px solid #31708E;
+
+   }
+
+   .hero-title-text{
+    
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: 1.4em;
+    border: 2px solid #31708E;
+    text-align: center;
+    margin: 5px;
+    
+   }
