@@ -11,7 +11,7 @@ export default class Header extends Component {
     }
     
     handleLogoutClick(props) {
-        axios.delete("http://localhost:3001/logout", { withCredentials: true })
+        axios.delete("/logout", { withCredentials: true })
             .then(res => {
                 this.props.handleLogout()
                 this.props.history.push("/login")

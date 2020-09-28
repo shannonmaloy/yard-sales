@@ -11,7 +11,7 @@ const Dashboard = (props) => {
     
 
     const getData = () => {
-        axios.get('http://localhost:3001/dashboard', { withCredentials: true })
+        axios.get('/dashboard', { withCredentials: true })
             .then(res => {
                 setUsersSales(res.data.sales)
             }).catch(err => {
@@ -24,7 +24,7 @@ const Dashboard = (props) => {
         
       
             confirm("Are you sure you want to delete?  This cannot be undone...")
-            axios.delete(`http://localhost:3001/sales/${id}`, { withCredentials: true })
+            axios.delete(`/sales/${id}`, { withCredentials: true })
                 .then(res => {
                     getData()
                 }).catch(err => {

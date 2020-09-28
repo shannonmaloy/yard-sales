@@ -27,7 +27,7 @@ export default class FindASale extends Component {
     }
     
     getData = () => {
-        axios.get('http://localhost:3001/sales')
+        axios.get('/sales')
             .then(res => {
                 this.setState({ allSales: (res.data.sales) }
                     

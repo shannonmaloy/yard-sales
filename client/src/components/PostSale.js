@@ -32,7 +32,7 @@ export default class PostSale extends Component {
       }
     
     getEditData = () => {
-        axios.get(`http://localhost:3001/sales/${this.props.match.params.id}`)
+        axios.get(`/sales/${this.props.match.params.id}`)
             .then(res => {
                 
                 this.setState({ 
