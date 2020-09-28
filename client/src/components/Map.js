@@ -8,11 +8,10 @@ const Map = (props) => {
   const mapRef = useRef(null);
   
   const libraries = ["geometry"]
-  let salesData = null
+  let salesData = []
   if (props.dataProps.filteredSales) {
-   salesData = props.dataProps.filteredSales
-  } else salesData = props.dataProps.allSales
-  console.log(salesData, "DATADADADA")
+    salesData = props.dataProps.filteredSales
+  } else { salesData = props.dataProps.allSales }
 
   //Google Map options setup 
   const mapContainerStyle = {
@@ -40,17 +39,23 @@ const Map = (props) => {
       
   */
   const searchResultsAndFitBoundMap = map => {
-  
-   
-    (props.dataProps.bounds ? mapRef.current.fitBounds(props.dataProps.bounds) : console.log(props.dataProps.bounds))
-    console.log("Props in Maps:", props)
+    if (props.dataProps.filteredData){
+    const bounds = new google.maps.LatLngBounds();
+    props.dataProps.filteredData.map(place => {
+      console.log("Sale ID: ", place.id, "Lat/Lng: ", { lat: parseFloat(place.lat), lng: parseFloat(place.lng) })
+        bounds.extend({  lat: parseFloat(place.lat), lng: parseFloat(place.lng) })
+        console.log(bounds.toJSON());
+        console.log(map)
+      })
+      mapRef.current.fitBounds(bounds)
+    }
   }
 
-  function handleLoad(map) {
-    mapRef.current = map
+  const handleLoad = (map) => {
+     mapRef.current = map
     console.log("Map here", map)
-    searchResultsAndFitBoundMap()
-    
+    console.log("WHA:LJ", mapRef.current)
+    searchResultsAndFitBoundMap(map)
   }
 
   //Possible Future feature - on map change reload data to current bounds
@@ -62,10 +67,11 @@ const Map = (props) => {
 
   //This is where the magic happens!  This function renders the Map, map Markers, map MarkerClusters, and InfoWindows
   const renderMap = () => {
-    
+    console.log(mapRef.current, props.dataProps.bounds)
+    if (props.dataProps.bounds) { mapRef.current.fitBounds(props.dataProps.bounds) }
       return (
         <div>
-          {console.log("Hello before map render", props)}
+          {console.log("Hello before map render", mapRef.current)}
           <GoogleMap
             
             id="map"

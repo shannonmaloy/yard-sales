@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, useRef } from 'react'
 import Sales from "./Sales"
 import Map from "./Map"
 import axios from 'axios'
@@ -18,6 +18,7 @@ export default class FindASale extends Component {
             zoom: 11,
             bounds: null,
         }
+        
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleChange = this.handleChange.bind(this)
         this.geocodeSearchBarInput = this.geocodeSearchBarInput.bind(this)
@@ -27,10 +28,11 @@ export default class FindASale extends Component {
         axios.get('http://localhost:3001/sales')
             .then(res => {
                 this.setState({ allSales: (res.data.sales) }
+                    
                 )
             }).catch(err => {
                 console.log("check login", err)
-            })
+            }) 
     }
     
     handleSubmit(event) {
@@ -40,8 +42,7 @@ export default class FindASale extends Component {
             searchRadius: parseFloat(this.state.searchRadius)
         })
         this.geocodeSearchBarInput(this.state.searchBarInput)
-        console.log("THIS from FindSale", this)
-        console.log(this.state)
+        
     }
 
     handleChange(event) {
@@ -62,6 +63,7 @@ export default class FindASale extends Component {
     }
     geocodeSearchBarInput = (searchBarInput) => {
         const geocoder = new google.maps.Geocoder()
+        console.log(map)
         geocoder.geocode({ address: searchBarInput }, (results, status) => {
             console.log("Hello geocoded address", status, "Then ", results[0].geometry.location.toJSON())
             this.setState({ geocodedSearchBarInput: results[0].geometry.location.toJSON() }, () => {
@@ -72,25 +74,26 @@ export default class FindASale extends Component {
 
     filterData = () => {
         let filteredSalesArr = []
-        
-        let bounds = new google.maps.LatLngBounds() 
+        this.setState({bounds: null})
+        const bounds = new google.maps.LatLngBounds() 
         this.state.allSales.map(place => {
             console.log("Sale ID: ", place.id, "Lat/Lng: ", { lat: parseFloat(place.lat), lng: parseFloat(place.lng) }, "Geocode Result:", this.state.geocodedSearchBarInput.lat)
             let distanceInMiles = this.distance(place.lat, place.lng, this.state.geocodedSearchBarInput.lat, this.state.geocodedSearchBarInput.lng)
-            console.log("Distance from center: ", distanceInMiles)
+            console.log("Distance from center: ", distanceInMiles, this.state.searchRadius)
             if (distanceInMiles < this.state.searchRadius) {
                 console.log("Inside 66")
                 bounds.extend({  lat: parseFloat(place.lat), lng: parseFloat(place.lng) })
                 console.log(bounds.toJSON());
                 filteredSalesArr.push(place)
             }
-        });
-        
+        })
+        console.log("BOUNDS BEFORE", this.state.bounds)
+        // mapRef.current.fitBounds(bounds)
         this.setState({
             filteredSales: filteredSalesArr,
             bounds: bounds
         }) 
-        console.log("Seeting fiteredData State", filteredSalesArr, "BOUNDS", this.state)
+        console.log("Seeting fiteredData State", filteredSalesArr, "BOUNDS", this.state.bounds)
     };
     
     
@@ -101,7 +104,7 @@ export default class FindASale extends Component {
     }
 
     render() {
-        console.log(this.state)
+      
         
         return (
             <div>
@@ -113,7 +116,8 @@ export default class FindASale extends Component {
                 <input type="number" name="searchRadius" placeholder="Enter radius in miles" value={this.state.searchRadius} onChange={this.handleChange} />
                     <button type="submit">Search</button>
                 </form>
-                {<Map dataProps={this.state}/>}
+                {this.state.filteredSales ? (<Map dataProps={this.state}/>) : (this.state.allSales ? (<Map dataProps={this.state}/>) : (<p>Loading Google Map</p>))}
+
                 {<Sales dataProps={this.state}/>}
                 {<Example dataProps={this.state}/>}
             </div>
