@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-
+import Login from './auth/Login'
 const Users = () => {
   const [data, setData] = useState(null);
   useEffect(() => {
@@ -12,20 +12,14 @@ const Users = () => {
 
   return (
     <div>
-      {data ? (
-        data.map((user) => {
-          return (
+     
             <div className="user" key={user.id}>
                   <h3>{user.email}</h3>
-              
+                  <Login/>
                   <p>{user.name}</p>
                   <p>{user.password}</p>
             </div>
-          );
-        })
-      ) : (
-        <p>Loading...</p>
-      )}
+          
     </div>
   )
 }

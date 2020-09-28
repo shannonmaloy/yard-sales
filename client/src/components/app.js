@@ -3,12 +3,12 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import axios from 'axios'
 import Home from "./Home"
 import Dashboard from "./Dashboard"
-import Sales from "./Sales"
-import Map from "./Map"
+import SplashPage from "./SplashPage"
 import Header from "./Header"
 import Footer from "./Footer"
 import PostSale from "./PostSale"
 import FindSales from "./FindSales"
+
 
 console.log(process.env.REACT_APP_GOOGLE_MAPS_API_KEY)
 
@@ -18,10 +18,10 @@ export default class App extends Component {
 
     this.state = {
       loggedInStatus: "Not_Logged_In",
-      user: {}
-
+      user: {},
+      redirect: "/login",
     }
-
+    
     this.handleLogin = this.handleLogin.bind(this)
     this.handleLogout = this.handleLogout.bind(this)
   }
@@ -41,7 +41,8 @@ export default class App extends Component {
         } else if (!res.data.logged_in && this.state.loggedInStatus === "Logged_In") {
           this.setState({
             loggedInStatus: "Not_Logged_In",
-            user: {}
+            user: {},
+            redirect: "/login"
           })
         }
       }).catch(err => {
@@ -59,23 +60,28 @@ export default class App extends Component {
   }
 
   handleLogout() {
+    console.log("Arrived Logout")
     this.setState({
       loggedInStatus: "Not_Logged_In",
       user: {}
     })
+    console.log("Arrived Logout")
+    this.props.history.push('/login')
   }
 
+  
  
   render() {
     return (
-      <div className='app'>
+      <div>
         <BrowserRouter>
           <Header loggedInStatus={this.state.loggedInStatus} user={this.state.use} handleLogin={this.handleLogin} handleLogout={this.handleLogout}/>
           <Switch>
-            <Route exact path={"/"} render={props => (<Home {...props} loggedInStatus={this.state.loggedInStatus} handleLogin={this.handleLogin} handleLogout={this.handleLogout}/>)} />
+            <Route exact path={"/"} component={SplashPage}/>
             <Route exact path={"/dashboard"} render={props => (<Dashboard {...props} loggedInStatus={this.state.loggedInStatus} user={this.state.user}/>)} />
             <Route exact path={"/sales"} render={() => <FindSales />} />
-            <Route exact path={"/sales/post"} render={() => <PostSale user={this.state.user}/>} />
+            <Route exact path={"/sales/new"} render={props => (<PostSale {...props} redirect={this.state.redirect} loggedInStatus={this.state.loggedInStatus} user={this.state.user}/>)} />
+            <Route exact path={"/login"} render={props => (<Home {...props} loggedInStatus={this.state.loggedInStatus} handleLogin={this.handleLogin} handleLogout={this.handleLogout}/>)} />
           </Switch>
         <Footer />
         </BrowserRouter>

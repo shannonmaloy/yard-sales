@@ -7,7 +7,9 @@ import Registration from './auth/Registration'
 export default class Home extends Component {
     constructor(props) {
         super(props)
-
+        this.state = {
+            
+        }
         this.handleSuccessfulAuth = this.handleSuccessfulAuth.bind(this)
         this.handleLogoutClick = this.handleLogoutClick.bind(this)
     }
@@ -20,7 +22,10 @@ export default class Home extends Component {
     handleLogoutClick() {
         axios.delete("http://localhost:3001/logout", { withCredentials: true })
             .then(res => {
+                console.log(props)
                 this.props.handleLogout()
+                console.log(props)
+                this.props.history.push("/")
             })
             .catch(err => {
             console.log("logout error", err)

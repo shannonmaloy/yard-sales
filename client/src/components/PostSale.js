@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import {Redirect} from 'react-router-dom'
 import axios from 'axios'
 import moment from 'moment'
 import { LoadScript} from '@react-google-maps/api'
@@ -17,9 +18,10 @@ export default class PostSale extends Component {
             start_time: "",
             end_time: "",
             description: "",
-            minDate: moment().format("YYY-MM-DD"),
+            minDate: moment().format("YYYY-MM-DD"),
             geoCodedAddress: null,
             registrationErrors: "",
+            
         }
         
         this.handleSubmit = this.handleSubmit.bind(this)
@@ -88,7 +90,10 @@ export default class PostSale extends Component {
     }
 
     render() {
-        console.log(location)
+        if (this.props.redirect) {
+            console.log("Here", this.props.redirect)
+            return <Redirect to={this.props.redirect} />
+          }
         return (
             <div>
                 <LoadScript

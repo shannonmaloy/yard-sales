@@ -14,6 +14,7 @@ export default class Header extends Component {
         axios.delete("http://localhost:3001/logout", { withCredentials: true })
             .then(res => {
                 this.props.handleLogout()
+                this.props.history.push("/login")
             })
             .catch(err => {
             console.log("logout error", err)
@@ -27,11 +28,11 @@ export default class Header extends Component {
                 <ul className="nav-links">
                    
                     <li><Link to='/sales'>Find A Sale</Link></li>
-                    <li><Link to='/sales/post'>Post A Sale</Link></li>
+                    <li><Link to='/sales/new'>Post A Sale</Link></li>
                     <li><h1><Link to='/'>YARD SALE</Link></h1></li>
                     
-                    <li><Link to='/dashboard'>Account</Link></li>
-                    <li>{this.props.loggedInStatus === "Not_Logged_In" ? <Link to='/users'>Login</Link> : <Link to='/users' onClick={this.handleLogoutClick}>Logout</Link>}</li>
+                    <li>{this.props.loggedInStatus === "Not_Logged_In" ? null : (<Link to='/dashboard'>Dashboard</Link>)}</li>
+                    <li>{this.props.loggedInStatus === "Not_Logged_In" ? <Link to='/login'>Login</Link> : <Link to='/login' onClick={this.handleLogoutClick}>Logout</Link>}</li>
                 </ul>
             </nav>
         )
