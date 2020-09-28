@@ -53,22 +53,23 @@ const Map = (props) => {
 
   const handleLoad = (map) => {
      mapRef.current = map
-    console.log("Map here", map)
+    console.log("Map here", props)
     console.log("WHA:LJ", mapRef.current)
     searchResultsAndFitBoundMap(map)
+    props.mapBounds(map)
   }
-
+  console.log("H:LKJL:KJ:LJK")
   //Possible Future feature - on map change reload data to current bounds
   // const handleCenterChanged = () => {
   //   if (!mapRef.current) return
   //     const newPos = mapRef.current.getBounds().toJSON()
   //     console.log(newPos)
   // }
-
+  if (props.dataProps.bounds) { mapRef.current.fitBounds(props.dataProps.bounds) }
   //This is where the magic happens!  This function renders the Map, map Markers, map MarkerClusters, and InfoWindows
   const renderMap = () => {
     console.log(mapRef.current, props.dataProps.bounds)
-    if (props.dataProps.bounds) { mapRef.current.fitBounds(props.dataProps.bounds) }
+    
       return (
         <div>
           {console.log("Hello before map render", mapRef.current)}
