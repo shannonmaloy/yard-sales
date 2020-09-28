@@ -13,30 +13,30 @@ const Dashboard = (props) => {
     const getData = () => {
         axios.get('http://localhost:3001/dashboard', { withCredentials: true })
             .then(res => {
-                console.log(res.data.sales)
                 setUsersSales(res.data.sales)
-                    
-                
             }).catch(err => {
                 console.log("check login", err)
             }) 
     }
 
-  function deleteSale (id) {
-      console.log(id)
-      axios.delete(`http://localhost:3001/sales/${id}`, { withCredentials: true })
-          .then(res => {
-              getData()
-          }).catch(err => {
-              console.log("check login", err)
-          }) 
-      }
+    function deleteSale(id) {
+        if (confirm("Are you sure you want to delete?\nPress 'OK' to delete.")) {
+        
+      
+            confirm("Are you sure you want to delete?  This cannot be undone...")
+            axios.delete(`http://localhost:3001/sales/${id}`, { withCredentials: true })
+                .then(res => {
+                    getData()
+                }).catch(err => {
+                    console.log("check login", err)
+                })
+        }
+    }
 
     return (
         <div>
             
             <h1>Welcome back!</h1>
-            {console.log(usersSales)}
             {usersSales.length !== 0 ? (usersSales.map((sale) => {
             return (
               <div className="sale" key={sale.id}>

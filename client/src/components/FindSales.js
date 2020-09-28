@@ -23,7 +23,7 @@ export default class FindASale extends Component {
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleChange = this.handleChange.bind(this)
         this.geocodeSearchBarInput = this.geocodeSearchBarInput.bind(this)
-        
+        this.panToMarker = this.panToMarker.bind(this)
     }
     
     getData = () => {
@@ -67,7 +67,6 @@ export default class FindASale extends Component {
         const geocoder = new google.maps.Geocoder()
         console.log(map)
         geocoder.geocode({ address: searchBarInput }, (results, status) => {
-            console.log("Hello geocoded address", status, "Then ", results[0].geometry.location.toJSON())
             this.setState({ geocodedSearchBarInput: results[0].geometry.location.toJSON() }, () => {
                 this.filterData()
             })
@@ -79,28 +78,25 @@ export default class FindASale extends Component {
         this.setState({bounds: null})
         const bounds = new google.maps.LatLngBounds() 
         this.state.allSales.map(place => {
-            console.log("Sale ID: ", place.id, "Lat/Lng: ", { lat: parseFloat(place.lat), lng: parseFloat(place.lng) }, "Geocode Result:", this.state.geocodedSearchBarInput.lat)
             let distanceInMiles = this.distance(place.lat, place.lng, this.state.geocodedSearchBarInput.lat, this.state.geocodedSearchBarInput.lng)
-            console.log("Distance from center: ", distanceInMiles, this.state.searchRadius)
             if (distanceInMiles < this.state.searchRadius) {
                 bounds.extend({  lat: parseFloat(place.lat), lng: parseFloat(place.lng) })
-                console.log(bounds.toJSON());
+                
                 filteredSalesArr.push(place)
             }
         })
-        
-        
         this.setState({
             filteredSales: filteredSalesArr,
             bounds: bounds
         }) 
-        console.log("Seeting fiteredData State", filteredSalesArr, "BOUNDS", this.state.bounds)
-    };
+    }
     
-    
-       
     componentDidMount() {
         this.getData()
+        
+    }
+
+    panToMarker() {
         
     }
 

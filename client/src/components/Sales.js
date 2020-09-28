@@ -1,27 +1,25 @@
 import React, { useState } from 'react';
-
+import moment from 'moment'
 const Sales = (props) => {
-  
-  console.log("Sales is updating...", props)
   
   let salesData = null
   if (props.dataProps.filteredSales) {
    salesData = props.dataProps.filteredSales
   } else salesData = props.dataProps.allSales
-  console.log(salesData, "DATADADADA")
+  
   
   return (
     <div className="sale-container">
-      {console.log(props)}
-      
+
       {salesData ? (
         salesData.map((sale) => {
+
           return (
             <div className="sale" key={sale.id}>
               <h3>{sale.user_id} {sale.address}, {sale.city}, {sale.state} {sale.zip}</h3>
                   <p>{sale.description}</p>
-              <p>Date & Time: {sale.date} </p>
-              <p>{sale.start_time} to {sale.end_time}</p>
+              <p>Date & Time: {moment(sale.date).format("MM-DD-YYYY")} </p>
+              <p>{moment(sale.start_time).format("hh:mmA")} to {moment(sale.end_time).format("hh:mmA")}</p>
             </div>
           );
         })

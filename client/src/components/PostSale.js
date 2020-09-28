@@ -21,23 +21,20 @@ export default class PostSale extends Component {
             minDate: moment().format("YYYY-MM-DD"),
             geoCodedAddress: null,
             registrationErrors: "",
-            
         }
-        
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleChange = this.handleChange.bind(this)
         this.postSale = this.postSale.bind(this)
     }
 
     componentDidMount() {
-        console.log(this.props.match.params.id)
         if (this.props.match.params.id) { this.getEditData() } 
       }
     
-      getEditData = () => {
+    getEditData = () => {
         axios.get(`http://localhost:3001/sales/${this.props.match.params.id}`)
             .then(res => {
-                console.log(res)
+                
                 this.setState({ 
                     address: res.data.sale.address,
                     city: res.data.sale.city,
@@ -47,15 +44,11 @@ export default class PostSale extends Component {
                     start_time: res.data.sale.start_time,
                     end_time: res.data.sale.end_time,
                     description: res.data.sale.description,
-                    
-                } 
-                    
-                    
-                )
+                } )
             }).catch(err => {
                 console.log("check login", err)
             }) 
-    }
+        }
     
     handleChange(event) {
         this.setState({
@@ -69,22 +62,18 @@ export default class PostSale extends Component {
         } = this.state
         let addressToGeocode = this.state.address + "," + this.state.city + "," + this.state.state + " " + this.state.zip
         event.preventDefault()
-        this.geocodeSaleData(addressToGeocode)
-        
+        this.geocodeSaleData(addressToGeocode)  
     }
 
     geocodeSaleData = (addressToGeocode) => {
         const geocoder = new google.maps.Geocoder()
-        
-        console.log(addressToGeocode)
         geocoder.geocode({ address: addressToGeocode }, (results, status) => {
-            console.log("Hello geocoded address", status, "Then ", results[0].geometry.location.toJSON())
             this.setState({
                 geoCodedAddress: results[0].geometry.location.toJSON(),
                 lat: results[0].geometry.location.toJSON().lat,
                 lng: results[0].geometry.location.toJSON().lng
             }, () => {
-                    this.postSale()
+                    { this.props.match.params.id ? this.updateSale() : this.postSale() }
                     return <Redirect to='/dashboard' />
             })
         })
@@ -95,7 +84,7 @@ export default class PostSale extends Component {
             address: this.state.address,
             city: this.state.city,
             state: this.state.state,
-            zip: this.state.date,
+            zip: this.state.zip,
             date: this.state.date,
             start_time: this.state.start_time,
             end_time: this.state.end_time,
@@ -113,10 +102,29 @@ export default class PostSale extends Component {
     })
     }
 
+    updateSale() {
+        axios.put(`http://localhost:3001/sales/${this.props.match.params.id}`, {
+            address: this.state.address,
+            city: this.state.city,
+            state: this.state.state,
+            zip: this.state.zip,
+            date: this.state.date,
+            start_time: this.state.start_time,
+            end_time: this.state.end_time,
+            description: this.state.description,
+            payment_type: this.state.payment_type,
+            lat: this.state.lat,
+            lng: this.state.lng,
+        }, { withCredentials: true }
+        ).then(res => {
+            this.props.history.push("/dashboard")
+            }).catch(err => {
+        console.log("posting error", error)
+    })
+    }
+
     render() {
-        console.log("Here", this.props.redirect)
         if (this.props.redirect) {
-            console.log("Here", this.props.redirect)
             return <Redirect to={this.props.redirect} />
           }
         return (
@@ -126,7 +134,7 @@ export default class PostSale extends Component {
                 >
                     {this.props.match.params.id ? <h1>Update Your Yard Sale Information</h1> : <h1>Post Your Yard Sale!</h1>}  
                 <form onSubmit={this.handleSubmit}>
-                    {console.log(this.state.minDate)}
+                    
                     <input type="text" name="address" placeholder="Address" value={this.state.address} onChange={this.handleChange} required/>
                     <input type="text" name="city" placeholder="City" value={this.state.city} onChange={this.handleChange} required/>
                     <input type="text" name="state" placeholder="State" value={this.state.state} onChange={this.handleChange} required/>

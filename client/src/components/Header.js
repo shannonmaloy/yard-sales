@@ -22,7 +22,7 @@ export default class Header extends Component {
     }
 
     render() {
-        console.log("props from header", this.props.loggedInState)
+        
         return (
             <nav className="nav-container">
                 <ul className="nav-links">

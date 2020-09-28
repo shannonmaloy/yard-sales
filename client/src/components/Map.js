@@ -1,10 +1,10 @@
 import React, {useState, useRef} from "react" 
 import { GoogleMap, useLoadScript, Marker, InfoWindow, MarkerClusterer} from "@react-google-maps/api"
+import moment from 'moment'
 
 const Map = (props) => {
-  
-  const [clickedLatLng, setClickedLatLng] = useState(null);
   const [selectedSale, setSelectedSale] = useState(null)
+  
   const mapRef = useRef(null);
   
   const libraries = ["geometry"]
@@ -42,44 +42,40 @@ const Map = (props) => {
     if (props.dataProps.filteredData){
     const bounds = new google.maps.LatLngBounds();
     props.dataProps.filteredData.map(place => {
-      console.log("Sale ID: ", place.id, "Lat/Lng: ", { lat: parseFloat(place.lat), lng: parseFloat(place.lng) })
         bounds.extend({  lat: parseFloat(place.lat), lng: parseFloat(place.lng) })
-        console.log(bounds.toJSON());
-        console.log(map)
       })
       mapRef.current.fitBounds(bounds)
     }
   }
 
   const handleLoad = (map) => {
-     mapRef.current = map
-    console.log("Map here", props)
-    console.log("WHA:LJ", mapRef.current)
+    mapRef.current = map
     searchResultsAndFitBoundMap(map)
-    
   }
-  console.log("H:LKJL:KJ:LJK")
+  
   //Possible Future feature - on map change reload data to current bounds
   // const handleCenterChanged = () => {
   //   if (!mapRef.current) return
   //     const newPos = mapRef.current.getBounds().toJSON()
   //     console.log(newPos)
   // }
-  if (props.dataProps.bounds) { mapRef.current.fitBounds(props.dataProps.bounds) }
+  let updated = false
+  if (props.dataProps.bounds) {
+    mapRef.current.fitBounds(props.dataProps.bounds)
+    props.dataProps.bounds = null
+  }
   //This is where the magic happens!  This function renders the Map, map Markers, map MarkerClusters, and InfoWindows
   const renderMap = () => {
-    console.log(mapRef.current, props.dataProps.bounds)
-    
+  
       return (
         <div>
-          {console.log("Hello before map render", mapRef.current)}
           <GoogleMap
             
             id="map"
             mapContainerStyle={mapContainerStyle}
             zoom={props.dataProps.zoom} 
             center={props.dataProps.center}
-            onClick={e => console.log(e.latLng.toJSON())}
+            // onClick={e => console.log(e.latLng.toJSON())}
             // onCenterChanged={(handleCenterChanged)}
             clickableIcons={false}
             onLoad={handleLoad}
@@ -123,9 +119,10 @@ const Map = (props) => {
                   setSelectedSale(null)
                 }}>
                 <div>
-                  <h3>{selectedSale.address}</h3>
-                  <h4>{selectedSale.city}, {selectedSale.state} {selectedSale.zip}</h4>
+                  <h3>{selectedSale.address}, {selectedSale.city}, {selectedSale.state} {selectedSale.zip}</h3>
+                  <h4></h4>
                   <p>{selectedSale.description}</p>
+                  <p>Date & Time: {moment(selectedSale.date).format("MM-DD-YYYY")} - {moment(selectedSale.start_time).format("hh:mmA")} to {moment(selectedSale.end_time).format("hh:mmA")}</p>
                 </div>
               </InfoWindow>)}
             
