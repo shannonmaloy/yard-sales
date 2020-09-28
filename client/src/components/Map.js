@@ -15,8 +15,8 @@ const Map = (props) => {
 
   //Google Map options setup 
   const mapContainerStyle = {
-    height: "50vh",
-    width: "50vw",
+    height: "inherit",
+    width: "inherit",
     clickableIcons: false
   }
   //File path for map cluster icons
@@ -68,7 +68,7 @@ const Map = (props) => {
   const renderMap = () => {
   
       return (
-        <div>
+        <div className="map-border">
           <GoogleMap
             
             id="map"

@@ -16,7 +16,7 @@ const Sales = (props) => {
 
           return (
             <div className="sale" key={sale.id}>
-              <h3>{sale.user_id} {sale.address}, {sale.city}, {sale.state} {sale.zip}</h3>
+              <p>{sale.user_id} {sale.address}, {sale.city}, {sale.state} {sale.zip}</p>
                   <p>{sale.description}</p>
               <p>Date & Time: {moment(sale.date).format("MM-DD-YYYY")} </p>
               <p>{moment(sale.start_time).format("hh:mmA")} to {moment(sale.end_time).format("hh:mmA")}</p>

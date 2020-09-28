@@ -132,7 +132,7 @@ export default class PostSale extends Component {
                 <LoadScript
                 googleMapsApiKey="AIzaSyCXK1LZV_v4jMsN0dqc4ooplYep9-lT64g"
                 >
-                    {this.props.match.params.id ? <h1>Update Your Yard Sale Information</h1> : <h1>Post Your Yard Sale!</h1>}  
+                    {(this.props.match.params.id >= 0) ? (<h1>Update Your Yard Sale Information</h1>) : <h1>Post Your Yard Sale!</h1>}  
                 <form onSubmit={this.handleSubmit}>
                     
                     <input type="text" name="address" placeholder="Address" value={this.state.address} onChange={this.handleChange} required/>

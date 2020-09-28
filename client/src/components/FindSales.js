@@ -10,7 +10,7 @@ export default class FindASale extends Component {
         super(props)
         this.state = {
             searchBarInput: "", 
-            searchRadius: 20, //search bar input
+            searchRadius: null, //search bar input
             allSales: null,
             filteredSales: null,
             geocodedSearchBarInput: null,
@@ -104,20 +104,20 @@ export default class FindASale extends Component {
       
         
         return (
-            <div>
+            <div className="find-sales-container">
                 <LoadScript
                 libraries = {["places"]}
                 googleMapsApiKey="AIzaSyCXK1LZV_v4jMsN0dqc4ooplYep9-lT64g"
             >
-                
+                <div className="search-bar-container">
                 <form onSubmit={this.handleSubmit}>
-                <input type="text" name="searchBarInput" placeholder="Enter an address, city, or ZIP code" value={this.state.searchBarInput} onChange={this.handleChange} />
-                <input type="number" name="searchRadius" placeholder="Enter radius in miles" value={this.state.searchRadius} onChange={this.handleChange} />
-                    <button type="submit">Search</button>
-                </form>
-                {this.state.filteredSales ? (<Map dataProps={this.state}/>) : (this.state.allSales ? (<Map dataProps={this.state}/>) : (<p>Loading Google Map</p>))}
+                <input className="search-bar-address" type="text" name="searchBarInput" placeholder="Enter an address, city, or ZIP code" value={this.state.searchBarInput} onChange={this.handleChange} />
+                <input className="search-bar-radius" type="number" name="searchRadius" placeholder="Distance (m)" value={this.state.searchRadius} onChange={this.handleChange} />
+                    <button className="search-bar-submit" type="submit">Search</button>
+                </form></div>
+                <div className="map-container">{this.state.filteredSales ? (<Map dataProps={this.state}/>) : (this.state.allSales ? (<Map dataProps={this.state}/>) : (<p>Loading Google Map</p>))}</div>
 
-                {<Sales dataProps={this.state}/>}
+                <div className="sales-list-container">{<Sales dataProps={this.state}/>}</div>
             </LoadScript>
             </div>
         )

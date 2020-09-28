@@ -74,20 +74,23 @@ export default class App extends Component {
  
   render() {
     return (
-      <div>
+      <div className="main">
         <BrowserRouter>
           <Header loggedInStatus={this.state.loggedInStatus} user={this.state.use} handleLogin={this.handleLogin} handleLogout={this.handleLogout}/>
+          <div className='main-area'>
           <Switch>
+            
             <Route exact path={"/"} component={SplashPage}/>
             <Route exact path={"/dashboard"} render={props => (<Dashboard {...props} loggedInStatus={this.state.loggedInStatus} user={this.state.user}/>)} />
             <Route exact path={"/sales"} render={() => <FindSales />} />
             <Route exact path={"/sales/new"} render={props => (<PostSale {...props} redirect={this.state.redirect} loggedInStatus={this.state.loggedInStatus} user={this.state.user}/>)} />
             <Route exact path={"/sales/:id"} render={props => (<PostSale {...props} redirect={this.state.redirect} loggedInStatus={this.state.loggedInStatus} user={this.state.user}/>)} />
-            
             <Route exact path={"/login"} render={props => (<Home {...props} loggedInStatus={this.state.loggedInStatus} handleLogin={this.handleLogin} handleLogout={this.handleLogout} />)} />
             <Route exact path={"/registration"} render={props => (<Home {...props} loggedInStatus={this.state.loggedInStatus} handleLogin={this.handleLogin} handleLogout={this.handleLogout}/>)} />
-          </Switch>
-        <Footer />
+            
+            </Switch>
+            </div>
+          <Footer />
         </BrowserRouter>
       </div>
     );
