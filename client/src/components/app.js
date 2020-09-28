@@ -8,6 +8,7 @@ import Header from "./Header"
 import Footer from "./Footer"
 import PostSale from "./PostSale"
 import FindSales from "./FindSales"
+import Registration from './auth/Registration';
 
 
 console.log(process.env.REACT_APP_GOOGLE_MAPS_API_KEY)
@@ -36,7 +37,8 @@ export default class App extends Component {
         if (res.data.logged_in && this.state.loggedInStatus === "Not_Logged_In") {
           this.setState({
             loggedInStatus: "Logged_In",
-            user: res.data.user
+            user: res.data.user,
+            redirect: null,
           })
         } else if (!res.data.logged_in && this.state.loggedInStatus === "Logged_In") {
           this.setState({
@@ -55,7 +57,8 @@ export default class App extends Component {
   handleLogin(data) {
     this.setState({
       loggedInStatus: "Logged In",
-      user: data.user
+      user: data.user,
+      redirect: null,
     })
   }
 
@@ -63,7 +66,8 @@ export default class App extends Component {
     console.log("Arrived Logout")
     this.setState({
       loggedInStatus: "Not_Logged_In",
-      user: {}
+      user: {},
+      redirect: '/login'
     })
     console.log("Arrived Logout")
     this.props.history.push('/login')
@@ -81,7 +85,10 @@ export default class App extends Component {
             <Route exact path={"/dashboard"} render={props => (<Dashboard {...props} loggedInStatus={this.state.loggedInStatus} user={this.state.user}/>)} />
             <Route exact path={"/sales"} render={() => <FindSales />} />
             <Route exact path={"/sales/new"} render={props => (<PostSale {...props} redirect={this.state.redirect} loggedInStatus={this.state.loggedInStatus} user={this.state.user}/>)} />
-            <Route exact path={"/login"} render={props => (<Home {...props} loggedInStatus={this.state.loggedInStatus} handleLogin={this.handleLogin} handleLogout={this.handleLogout}/>)} />
+            <Route exact path={"/sales/:id"} render={props => (<PostSale {...props} redirect={this.state.redirect} loggedInStatus={this.state.loggedInStatus} user={this.state.user}/>)} />
+            
+            <Route exact path={"/login"} render={props => (<Home {...props} loggedInStatus={this.state.loggedInStatus} handleLogin={this.handleLogin} handleLogout={this.handleLogout} />)} />
+            <Route exact path={"/registration"} render={props => (<Home {...props} loggedInStatus={this.state.loggedInStatus} handleLogin={this.handleLogin} handleLogout={this.handleLogout}/>)} />
           </Switch>
         <Footer />
         </BrowserRouter>

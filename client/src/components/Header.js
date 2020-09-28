@@ -31,7 +31,7 @@ export default class Header extends Component {
                     <li><Link to='/sales/new'>Post A Sale</Link></li>
                     <li><h1><Link to='/'>YARD SALE</Link></h1></li>
                     
-                    <li>{this.props.loggedInStatus === "Not_Logged_In" ? null : (<Link to='/dashboard'>Dashboard</Link>)}</li>
+                    <li>{this.props.loggedInStatus === "Not_Logged_In" ? (<Link to='/registration'>Sign-Up</Link>) : (<Link to='/dashboard'>Dashboard</Link>)}</li>
                     <li>{this.props.loggedInStatus === "Not_Logged_In" ? <Link to='/login'>Login</Link> : <Link to='/login' onClick={this.handleLogoutClick}>Logout</Link>}</li>
                 </ul>
             </nav>

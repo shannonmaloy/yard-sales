@@ -122,7 +122,6 @@ export default class FindASale extends Component {
                 {this.state.filteredSales ? (<Map dataProps={this.state}/>) : (this.state.allSales ? (<Map dataProps={this.state}/>) : (<p>Loading Google Map</p>))}
 
                 {<Sales dataProps={this.state}/>}
-                    {/* {<Example dataProps={this.state}/>} */}
             </LoadScript>
             </div>
         )

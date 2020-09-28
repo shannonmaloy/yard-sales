@@ -1,16 +1,12 @@
 import React, {useEffect, useState} from 'react'
 import axios from 'axios'
-
+import {Link} from 'react-router-dom'
 const Dashboard = (props) => {
     const [usersSales, setUsersSales] = useState([])
-    console.log("Hello from dashboard:", props)
+    
     useEffect(() => {
-        // fetch('/users')
-        //   .then(res => res.json())
-        //   .then(res => {
-        //     setData(res.users)
-        //   })
         getData()
+        
       }, [])
     
 
@@ -26,24 +22,33 @@ const Dashboard = (props) => {
             }) 
     }
 
+  function deleteSale (id) {
+      console.log(id)
+      axios.delete(`http://localhost:3001/sales/${id}`, { withCredentials: true })
+          .then(res => {
+              getData()
+          }).catch(err => {
+              console.log("check login", err)
+          }) 
+      }
 
     return (
         <div>
-            <div> Welcome back! {props.user.email}</div>
-            <h1>Status: {props.loggedInStatus}</h1>
+            
+            <h1>Welcome back!</h1>
             {console.log(usersSales)}
-            {usersSales ? (
-        usersSales.map((sale) => {
-          return (
-            <div className="sale" key={sale.id}>
-                  <h3>User ID:{sale.user_id} - {sale.address}, {sale.city}, {sale.state} {sale.zip}</h3>
+            {usersSales.length !== 0 ? (usersSales.map((sale) => {
+            return (
+              <div className="sale" key={sale.id}>
+                    <button type='button' onClick={() => deleteSale(sale.id)}><span role="img" aria-label="cross">❌</span></button>
+                    <Link to={`/sales/${sale.id}`} props={sale}><button type='button'><span role="img" aria-label="edit">Edit</span></button></Link>
+                  <h3>{sale.address}, {sale.city}, {sale.state} {sale.zip}</h3>
                   <p>{sale.id} - {sale.description}</p>
-              <p>Date & Time: {sale.date} </p>
-              <p>{sale.start_time} to {sale.end_time}</p>
-            </div>
-          );
-        })
-      ) : <p>No Yard Sales Posted...</p>}
+                  <p>Date & Time: {sale.date} </p>
+                <p>{sale.start_time} to {sale.end_time}</p>
+                {/* <button onClick={this.incrementMe}></button> */}
+              </div>
+            )})) : <p>You have no posted yard sales.</p>}
         </div>
     )
 }

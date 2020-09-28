@@ -8,7 +8,7 @@ export default class Home extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            
+            path: null
         }
         this.handleSuccessfulAuth = this.handleSuccessfulAuth.bind(this)
         this.handleLogoutClick = this.handleLogoutClick.bind(this)
@@ -22,10 +22,8 @@ export default class Home extends Component {
     handleLogoutClick() {
         axios.delete("http://localhost:3001/logout", { withCredentials: true })
             .then(res => {
-                console.log(props)
                 this.props.handleLogout()
-                console.log(props)
-                this.props.history.push("/")
+                return <Redirect to='/' />
             })
             .catch(err => {
             console.log("logout error", err)
@@ -35,11 +33,11 @@ export default class Home extends Component {
     render() {
         return (
             <div>
-                <h1>HOME COMPONENT</h1>
-                <h1>Status: {this.props.loggedInStatus}</h1>
-                <Registration handleSuccessfulAuth={this.handleSuccessfulAuth} />
-                <Login handleSuccessfulAuth={this.handleSuccessfulAuth} />
-                <button onClick={() => this.handleLogoutClick()}>Logout</button>
+                
+                
+                {this.props.location.pathname === '/registration' && <Registration handleSuccessfulAuth={this.handleSuccessfulAuth} />}
+                {this.props.location.pathname === '/login' && <Login handleSuccessfulAuth={this.handleSuccessfulAuth} />}
+                
             </div>
         )
     }

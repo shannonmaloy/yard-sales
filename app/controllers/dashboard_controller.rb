@@ -38,9 +38,15 @@ class DashboardController < ApplicationController
     end
 
     def destroy
+        if @current_user
         sale = Sale.find(params[:id])
         sale.destroy
         render json: {message: "Succesfully deleted"}
+        end
+        render json: {
+            message: "Unable to delete"
+        }
+   
     end
 
     private

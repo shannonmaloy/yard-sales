@@ -29,6 +29,34 @@ export default class PostSale extends Component {
         this.postSale = this.postSale.bind(this)
     }
 
+    componentDidMount() {
+        console.log(this.props.match.params.id)
+        if (this.props.match.params.id) { this.getEditData() } 
+      }
+    
+      getEditData = () => {
+        axios.get(`http://localhost:3001/sales/${this.props.match.params.id}`)
+            .then(res => {
+                console.log(res)
+                this.setState({ 
+                    address: res.data.sale.address,
+                    city: res.data.sale.city,
+                    state: res.data.sale.state,
+                    zip: res.data.sale.zip,
+                    date: res.data.sale.date,
+                    start_time: res.data.sale.start_time,
+                    end_time: res.data.sale.end_time,
+                    description: res.data.sale.description,
+                    
+                } 
+                    
+                    
+                )
+            }).catch(err => {
+                console.log("check login", err)
+            }) 
+    }
+    
     handleChange(event) {
         this.setState({
             [event.target.name]: event.target.value
@@ -36,15 +64,13 @@ export default class PostSale extends Component {
     }
 
     handleSubmit(event) {
-        event.preventDefault()
         const {
             address, city, state, zip, date, start_time, end_time, description, payment_type, lat, lng, user_id
         } = this.state
         let addressToGeocode = this.state.address + "," + this.state.city + "," + this.state.state + " " + this.state.zip
-        this.geocodeSaleData(addressToGeocode)
-
-        
         event.preventDefault()
+        this.geocodeSaleData(addressToGeocode)
+        
     }
 
     geocodeSaleData = (addressToGeocode) => {
@@ -58,15 +84,14 @@ export default class PostSale extends Component {
                 lat: results[0].geometry.location.toJSON().lat,
                 lng: results[0].geometry.location.toJSON().lng
             }, () => {
-                console.log("CONSOLE LOG 53: Post Sale:", this.state.geoCodedAddress)
-                this.postSale()
+                    this.postSale()
+                    return <Redirect to='/dashboard' />
             })
         })
     }
     
     postSale() {
         axios.post("http://localhost:3001/sales", {
-        
             address: this.state.address,
             city: this.state.city,
             state: this.state.state,
@@ -80,16 +105,16 @@ export default class PostSale extends Component {
             lng: this.state.lng,
             user_id: this.props.user.id
         
-    }, { withCredentials: true }
-    ).then(res => {
-        if (res.data.status === "created")
-        this.props.handleSuccessfulAuth(res.data)
-    }).catch(err => {
-        console.log("registration error", error)
+        }, { withCredentials: true }
+        ).then(res => {
+            this.props.history.push("/dashboard")
+            }).catch(err => {
+        console.log("posting error", error)
     })
     }
 
     render() {
+        console.log("Here", this.props.redirect)
         if (this.props.redirect) {
             console.log("Here", this.props.redirect)
             return <Redirect to={this.props.redirect} />
@@ -99,7 +124,7 @@ export default class PostSale extends Component {
                 <LoadScript
                 googleMapsApiKey="AIzaSyCXK1LZV_v4jMsN0dqc4ooplYep9-lT64g"
                 >
-          
+                    {this.props.match.params.id ? <h1>Update Your Yard Sale Information</h1> : <h1>Post Your Yard Sale!</h1>}  
                 <form onSubmit={this.handleSubmit}>
                     {console.log(this.state.minDate)}
                     <input type="text" name="address" placeholder="Address" value={this.state.address} onChange={this.handleChange} required/>
@@ -116,7 +141,7 @@ export default class PostSale extends Component {
                         <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat"/>
                         <label for="vehicle3"> Paypal</label> */}
                     <input type="textarea" name="description" placeholder="Enter a brief description of items being sold or any important info" value={this.state.description} onChange={this.handleChange} required />
-                    <button type="submit">Post A Sale!</button>
+                    <button type="submit">{this.props.match.params.id ? "Update Info" : "Post A Sale!"}</button>
                         </form>
                         </LoadScript>
             </div>
