@@ -47,7 +47,7 @@ export default class App extends Component {
           })
         }
       }).catch(err => {
-        console.log("check login", err)
+        console.log("check login...", err)
       })
   }
 

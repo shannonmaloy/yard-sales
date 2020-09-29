@@ -10,7 +10,7 @@ export default class FindASale extends Component {
         super(props)
         this.state = {
             searchBarInput: "", 
-            searchRadius: null, //search bar input
+            searchRadius: 15, //search bar input
             allSales: null,
             filteredSales: null,
             geocodedSearchBarInput: null,
