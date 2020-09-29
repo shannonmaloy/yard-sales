@@ -29,7 +29,7 @@ export default class Registration extends Component {
         const {
             email,password, password_confirmation, address, city, state, zip
         } = this.state
-        axios.post("http://localhost:3001/registrations", {
+        axios.post("/registrations", {
             user: {
                 email: email,
                 password: password,
@@ -42,6 +42,7 @@ export default class Registration extends Component {
         }, { withCredentials: true }
         ).then(res => {
             if (res.data.status === "created")
+            
             this.props.handleSuccessfulAuth(res.data)
         }).catch(err => {
             console.log("registration error", error)

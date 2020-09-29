@@ -83,3 +83,4 @@ production:
   database: yard_sales_finder_production
   username: yard_sales_finder
   password: <%= ENV['YARD_SALES_FINDER_DATABASE_PASSWORD'] %>
+  url: <%= ENV['postgres://zioygetovctdqe:c4286a45fd1b61a7b258a8214cbcefbc13e052c8d6f3cd7d4dafbef7ef626029@ec2-54-158-222-248.compute-1.amazonaws.com:5432/d41vij9fqqt8ul'] %>
