@@ -80,7 +80,7 @@ export default class PostSale extends Component {
     }
     
     postSale() {
-        axios.post("http://localhost:3001/sales", {
+        axios.post("/sales", {
             address: this.state.address,
             city: this.state.city,
             state: this.state.state,
@@ -103,7 +103,7 @@ export default class PostSale extends Component {
     }
 
     updateSale() {
-        axios.put(`http://localhost:3001/sales/${this.props.match.params.id}`, {
+        axios.put(`/sales/${this.props.match.params.id}`, {
             address: this.state.address,
             city: this.state.city,
             state: this.state.state,
