@@ -10,7 +10,7 @@ export default class FindASale extends Component {
         super(props)
         this.state = {
             searchBarInput: "", 
-            searchRadius: 15, //search bar input
+            searchRadius: "", //search bar input
             allSales: null,
             filteredSales: null,
             geocodedSearchBarInput: null,
@@ -27,7 +27,7 @@ export default class FindASale extends Component {
     }
     
     getData = () => {
-        axios.get('/sales')
+        axios.get('/sales', { withCredentials: true })
             .then(res => {
                 this.setState({ allSales: (res.data.sales) }
                     
@@ -111,9 +111,9 @@ export default class FindASale extends Component {
                 googleMapsApiKey="AIzaSyCXK1LZV_v4jMsN0dqc4ooplYep9-lT64g"
             >
                 <div className="search-bar-container">
-                <form onSubmit={this.handleSubmit}>
-                <input className="search-bar-address" type="text" name="searchBarInput" placeholder="Enter an address, city, or ZIP code" value={this.state.searchBarInput} onChange={this.handleChange} />
-                <input className="search-bar-radius" type="number" name="searchRadius" placeholder="Distance (m)" value={this.state.searchRadius} onChange={this.handleChange} />
+                <form className="search-bar-form" onSubmit={this.handleSubmit}>
+                <input className="search-bar-address" type="text" name="searchBarInput" placeholder="Enter an address, city, or ZIP code" value={this.state.searchBarInput} onChange={this.handleChange} required/>
+                            <input className="search-bar-radius" type="number" name="searchRadius" placeholder="Distance (m)" value={this.state.searchRadius} onChange={this.handleChange} min={1} required/>
                     <button className="search-bar-submit" type="submit">Search</button>
                 </form></div>
                 <div className="map-container">{this.state.filteredSales ? (<Map dataProps={this.state}/>) : (this.state.allSales ? (<Map dataProps={this.state}/>) : (<p>Loading Google Map</p>))}</div>

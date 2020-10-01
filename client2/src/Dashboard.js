@@ -21,21 +21,18 @@ const Dashboard = (props) => {
     }
 
     function deleteSale(id) {
-        // if (confirm("Are you sure you want to delete?\nPress 'OK' to delete.")) {
         
-      
-        //     confirm("Are you sure you want to delete?  This cannot be undone...")
-        //     axios.delete(`/sales/${id}`, { withCredentials: true })
-        //         .then(res => {
-        //             getData()
-        //         }).catch(err => {
-        //             console.log("check login", err)
-        //         })
-        // }
+            axios.delete(`/sales/${id}`, { withCredentials: true })
+                .then(res => {
+                    getData()
+                }).catch(err => {
+                    console.log("check login", err)
+                })
+        
     }
 
     return (
-        <div>
+        <div className='dashboard-container'>
             
             <h1>Welcome back!</h1>
             {usersSales.length !== 0 ? (usersSales.map((sale) => {

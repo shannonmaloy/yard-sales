@@ -81,16 +81,16 @@ const Map = (props) => {
             onLoad={handleLoad}
           >
             {/* child components go here - Marker, InfoWindow */}
-            <MarkerClusterer  minimumClusterSize={3}>
+            <MarkerClusterer  minimumClusterSize={2}>
               {(clusterer) =>
                 salesData.map((saleMarker) => (
               <Marker
                 options={{animation: window.google.maps.Animation.DROP}}
                 key={saleMarker.id}
-                // icon={{
-                //   url: "./house-favicon.png",
-                //   scaledSize: new window.google.maps.Size(20, 20),
-                // }}
+                icon={{
+                  url: "./house-favicon.png",
+                  scaledSize: new window.google.maps.Size(20, 20),
+                }}
                 position={{
                   lat: parseFloat(saleMarker.lat),
                   lng: parseFloat(saleMarker.lng),
@@ -118,7 +118,7 @@ const Map = (props) => {
                 onCloseClick={() => {
                   setSelectedSale(null)
                 }}>
-                <div>
+                <div className='info-window'>
                   <p className="sale-window-address1">{selectedSale.address}</p>
                   <p className="sale-window-address2">{selectedSale.city}, {selectedSale.state} {selectedSale.zip}</p>
                   <p className="sale-window-date">Date: {moment(selectedSale.date).format("MM-DD-YYYY")} </p>

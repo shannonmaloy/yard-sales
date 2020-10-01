@@ -168,6 +168,7 @@
     font-size: 14px;
     font-weight: 600;
     background-color: #8FC1E3;
+    margin: 0;
   }
 
    .map-container {
@@ -221,6 +222,9 @@
      padding: 0;
      text-align: center;
      height: 30px;
+     white-space: pre-wrap;
+     overflow: hidden;
+     
    }
 
    .sale-list-address2 {
@@ -254,6 +258,9 @@
     font-size: 15px;
    }
 
+   .info-window {
+     max-width: 400px;
+   }
    .sale-window-address1 {
     font-family: 'Montserrat', sans-serif;
      font-weight: 900;
@@ -323,9 +330,11 @@
 
    .login-container {
      display: flex;
+     flex-wrap: wrap;
       align-content: center;
      background-color: #F7F9FB;
-     border: 2px solid black;
+     border-left: 2px solid #5085A5;
+     border-right: 2px solid #5085A5;
      width: 100%;
      height: 75vh;
      padding: 10px 10px;
@@ -334,67 +343,161 @@
    }
 
    .login-container form {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    height: 35px;
-    padding: 0;
-    border: 0;
-    align-content: center;
-  
-   }
-
-   .login-container input{
+    color: #F7F9FB;
+    text-align: center;
     width: 40%;
-    padding: 0 10px;
-    
-    font-size: 14px;
-    font-weight: 60; 
-    border-top: solid 2px #8FC1E3;
-    border-bottom: solid 2px #8FC1E3;
-    border-left: solid 2px #8FC1E3;
-   }
-
-   .login-container button{
-    width: 30%;
-    padding: 0 10px;
-    
-    font-size: 14px;
-    font-weight: 60; 
-    border-top: solid 2px #8FC1E3;
-    border-bottom: solid 2px #8FC1E3;
-    border-left: solid 2px #8FC1E3;
-   }
-
-   button{
-    width: 30%;
-    padding: 0 10px;
-    
-    font-size: 14px;
-    font-weight: 60; 
-    border-top: solid 2px #8FC1E3;
-    border-bottom: solid 2px #8FC1E3;
-    border-left: solid 2px #8FC1E3;
-   }
-
-   input{
-    width: 40%;
-    padding: 0 10px;
-    
-    font-size: 14px;
-    font-weight: 60; 
-    border-top: solid 2px #8FC1E3;
-    border-bottom: solid 2px #8FC1E3;
-    border-left: solid 2px #8FC1E3;
-   }
-
-   form {
-    width: 100%;
     display: flex;
-    justify-content: center;
-    height: 35px;
-    padding: 0;
-    border: 0;
+    justify-items: center;
+    height: 250px;
+    border: 2px black solid;
     align-content: center;
-  
+    flex-direction: column;
+    margin: 0 auto;
+    font-family: 'Montserrat', sans-serif;
+    border: 2px solid #31708E;
+    padding: 5px 20px;
+    margin: 5px 15px;
+    background-color: #5085A5;
    }
+   
+   .login-container form p{
+     padding: 0px;
+     margin: 0 0 5px 0;
+     font-size: 1.9em;
+     font-weight: 600;
+   }
+
+   .login-container input, button{
+    width: 50%;
+    padding: 0 10px;
+    max-width: 350px;
+    height: 35px;
+    font-size: 14px;
+    font-weight: 60; 
+    border: solid 2px #8FC1E3;
+    margin: 3px auto;
+   }
+
+   .login{
+    width: 50%;
+    font-weight: 600;
+    padding: 0 10px;
+    max-width: 350px;
+    margin: 3px auto;
+    font-size: 14px;
+    background-color: #8FC1E3;
+    border: solid 2px #8FC1E3;
+    height: 35px;
+    margin-bottom: 5px;
+   }
+
+   .login-container button:hover {
+    background: #31708E ;
+    color: black;
+  }
+
+  .register-container {
+    display: flex;
+    flex-wrap: wrap;
+     align-content: center;
+    background-color: #F7F9FB;
+    border-left: 2px solid #5085A5;
+    border-right: 2px solid #5085A5;
+    width: 100%;
+    height: 75vh;
+    padding: 10px 10px;
+    
+    justify-content: center;
+  }
+
+  .register-container form {
+   width: 40%;
+   color: #F7F9FB;
+   text-align: center;
+   display: flex;
+   justify-items: center;
+   height: 450px;
+   border: 2px black solid;
+   align-content: center;
+   flex-direction: column;
+   margin: 0 auto;
+   font-family: 'Montserrat', sans-serif;
+    border: 2px solid #31708E;
+    padding: 5px 20px;
+    margin: 5px 15px;
+    background-color: #5085A5;
+  }
+
+  .register-container input, button{
+    width: 50%;
+    padding: 0 10px;
+    max-width: 350px;
+    height: 35px;
+    font-size: 14px;
+    font-weight: 60; 
+    border: solid 2px #8FC1E3;
+    margin: 3px auto;
+   }
+
+   .register-container form p{
+    padding: 0px;
+    margin: 0 0 5px 0;
+    font-size: 1.9em;
+    font-weight: 600;
+  }
+
+  .post-sale-container {
+    display: flex;
+    flex-wrap: wrap;
+     align-content: center;
+    background-color: #F7F9FB;
+    border-left: 2px solid #5085A5;
+    border-right: 2px solid #5085A5;
+    width: 100%;
+    height: 75vh;
+    padding: 10px 10px;
+    
+    justify-content: center;
+  }
+
+  .post-sale-container form {
+   width: 40%;
+   color: #F7F9FB;
+   text-align: center;
+   display: flex;
+   justify-items: center;
+   height: 450px;
+   border: 2px black solid;
+   align-content: center;
+   flex-direction: column;
+   margin: 0 auto;
+   font-family: 'Montserrat', sans-serif;
+    border: 2px solid #31708E;
+    padding: 5px 20px;
+    margin: 5px 15px;
+    background-color: #5085A5;
+  }
+
+  .post-sale-container input, button{
+    width: 50%;
+    padding: 0 10px;
+    max-width: 350px;
+    height: 35px;
+    font-size: 14px;
+    font-weight: 60; 
+    border: solid 2px #8FC1E3;
+    margin: 3px auto;
+   }
+
+   .post-sale-container form p{
+    padding: 0px;
+    margin: 0 0 5px 0;
+    font-size: 1.9em;
+    font-weight: 600;
+  }
+
+
+
+  
+
+  

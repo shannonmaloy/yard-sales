@@ -4,16 +4,27 @@ const Sales = (props) => {
   
   let salesData = null
   if (props.dataProps.filteredSales) {
+    console.log(salesData)
    salesData = props.dataProps.filteredSales
   } else salesData = props.dataProps.allSales
-  
+  console.log(salesData)
   
   return (
     <div className="sale-container">
 
       {salesData ? (
         salesData.map((sale) => {
-          {console.log(sale.start_time)}
+          console.log(salesData.length)
+          if (salesData.length === []) {
+            return(
+            <div className="sale" key={sale.id}>
+            <p className="sale-list-address1">No Current Sales In Your Area</p> 
+            <p className="sale-list-address2">Try A New Search</p>
+            <p className="sale-list-date"></p>
+            <p className="sale-list-time"></p>
+            <p className="sale-list-description"></p>
+          </div>)
+          } else
           return (
             
             <div className="sale" key={sale.id}>
