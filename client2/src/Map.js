@@ -1,17 +1,24 @@
-import React, {useState, useRef} from "react" 
-import { GoogleMap, useLoadScript, Marker, InfoWindow, MarkerClusterer} from "@react-google-maps/api"
+import React, {useState, useRef, useEffect} from "react" 
+import { GoogleMap, useGoogleMap, useLoadScript, Marker, InfoWindow, MarkerClusterer} from "@react-google-maps/api"
 import moment from 'moment'
 
 const Map = (props) => {
   const [selectedSale, setSelectedSale] = useState(null)
   
   const mapRef = useRef(null);
-  
-  
+
   let salesData = []
   if (props.dataProps.filteredSales) {
     salesData = props.dataProps.filteredSales
   } else { salesData = props.dataProps.allSales }
+  console.log("PASS", props)
+  console.log("PASS", props.dataProps.centerChange)
+
+  useEffect(() => {
+    if (props.dataProps.centerChange){
+      mapRef.current.panTo({ lat: props.dataProps.centerChange.lat, lng: props.dataProps.centerChange.lng })
+  }
+ }, [props.dataProps.centerChange])
 
   //Google Map options setup 
   const mapContainerStyle = {
@@ -36,7 +43,6 @@ const Map = (props) => {
   /*  Important Function: Determines the bounds of the rendered map based on the search results and distance.  
       This function determines the distance from the users input to each sale then determines 
       if the sale should be mapped...
-      
   */
   const searchResultsAndFitBoundMap = map => {
     if (props.dataProps.filteredData){

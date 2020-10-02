@@ -17,7 +17,7 @@ export default class FindASale extends Component {
             center: { lat: 33.860649, lng: -84.339790 },
             zoom: 11,
             bounds: null,
-           
+            centerChange: null,
         }
         
         this.handleSubmit = this.handleSubmit.bind(this)
@@ -100,7 +100,7 @@ export default class FindASale extends Component {
     panToMarker(lat, lng) {
         console.log("CLICK", lat, lng)
         this.setState({
-            center: {
+            centerChange: {
                 lat: parseFloat(lat),
                 lng: parseFloat(lng),
             }
