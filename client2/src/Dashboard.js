@@ -34,7 +34,7 @@ const Dashboard = (props) => {
     return (
         <div className="dashboard-whole-container">
             <p className="dashboard-header">Welcome Back!</p>
-            <p className="dashboard-header">Your Posted Sales:</p>
+            <p className="dashboard-header2">Your Posted Sales:</p>
             <div className='dashboard-container'>
             {usersSales.length !== 0 ? (usersSales.map((sale) => {
             return (
