@@ -64,7 +64,7 @@ export default class Registration extends Component {
                     <input type="text" name="state" placeholder="State (optional)" value={this.state.state} onChange={this.handleChange} />
                     <input type="text" name="zip" placeholder="Zip (optional)" value={this.state.zip} onChange={this.handleChange} />
                     
-                    <button type="submit">Register</button>
+                    <button className="register-button" type="submit">Register</button>
                 </form>
             </div>
         )

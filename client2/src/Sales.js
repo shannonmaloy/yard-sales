@@ -30,8 +30,8 @@ const Sales = (props) => {
             <div className="sale" key={sale.id}>
               <p className="sale-list-address1">{sale.address}</p> 
               <p className="sale-list-address2">{sale.city}, {sale.state} {sale.zip}</p>
-              <p className="sale-list-date">Date: {moment(sale.date).format("MM-DD-YYYY")}</p>
-              <p className="sale-list-time">Time: {moment(sale.start_time).format("hh:mmA")} to {moment(sale.end_time).format("hh:mmA")}</p>
+              <p className="sale-list-date"><span className='bold'>Date:</span> {moment(sale.date).format("MM-DD-YYYY")}</p>
+              <p className="sale-list-time"><span className='bold'>Time: </span>{moment(sale.start_time).format("hh:mmA")} to {moment(sale.end_time).format("hh:mmA")}</p>
               <p className="sale-list-description">{sale.description}</p>
             </div>
           )

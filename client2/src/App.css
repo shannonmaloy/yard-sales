@@ -219,11 +219,13 @@
      font-weight: 900;
      font-size: 25px;
      margin: 0 auto;
-     padding: 0;
+     padding-bottom: 4px;
      text-align: center;
-     height: 30px;
+     /* height: 30px; */
      white-space: pre-wrap;
      overflow: hidden;
+     vertical-align: top;
+     height: 33px;
      
    }
 
@@ -232,10 +234,12 @@
      font-weight: 900;
      font-size: 25px;
      margin: 0 auto;
-     padding: 4px 0;
+     padding: 2px 0 4px 0;
      text-align: center;
      height: 30px;
      border-bottom: 2px solid #31708E;
+     vertical-align: super;
+     line-height: 25px;
    }
 
    .sale-list-date {
@@ -439,6 +443,24 @@
     margin: 3px auto;
    }
 
+   .register-button, .post-sale-button{
+    width: 50%;
+    font-weight: 600;
+    padding: 0 10px;
+    max-width: 350px;
+    margin: 3px auto;
+    font-size: 14px;
+    background-color: #8FC1E3;
+    border: solid 2px #8FC1E3;
+    height: 35px;
+    margin-bottom: 5px;
+   }
+
+   .register-button:hover, .post-sale-button:hover{
+    background: #31708E ;
+    color: black;
+  }
+
    .register-container form p{
     padding: 0px;
     margin: 0 0 5px 0;
@@ -496,8 +518,157 @@
     font-weight: 600;
   }
 
+  .sales-list-container {
+    font-family: 'Montserrat', sans-serif;
+     background-color: #8FC1E3;
+     border-left: 2px solid #5085A5;
+     border-right: 2px solid #5085A5;
+    
+     box-sizing: border-box;
+     justify-items: center; 
+     height: 75vh;
+     width: 35%; 
+     scroll-behavior: smooth;
+     overflow: scroll;
+   }
 
+   .dashboard-container {
+    font-family: 'Montserrat', sans-serif;
+     
+     justify-content: center;
+     width: 100%;
+     background-color: #F7F9FB;
+      display: flex;
+      flex-wrap: wrap;
+   }
 
+   .dashboard-container>div {
+    flex: 0 45%;
+    
+    box-sizing:border-box
+  }
+
+   .dashboard-sale {
+    font-family: 'Montserrat', sans-serif;
+     border: 2px solid #31708E;
+     padding: 5px 20px;
+     margin: 5px 15px;
+     background-color: #8FC1E3;
+     width: 100%;
+   }
+
+   .dashboard-list-address {
+    font-family: 'Montserrat', sans-serif;
+     font-weight: 900;
+     font-size: 20px;
+     margin: 0 auto;
+     padding: 0;
+     height: 30px;
+     white-space: pre-wrap;
+     overflow: hidden;
+     
+   }
+
+   .dashboard-list-date {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+    margin: 5px auto 0 auto ;
+    
+   }
+
+   .dashboard-list-time {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+    margin: 0 auto 5px auto ;
+    border-bottom: 2px solid #31708E;
+   }
   
+   .dashboard-list-description {
+    font-weight: 500;
+    font-size: 15px;
+    height: 80px;
+    overflow-y: scroll;
+   }
 
+   .dashboard-header{
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 2.5em;
+    margin: 0px auto 0 auto;
+    padding-left: 20px;
+    background-color: #5085A5;
+    color: #F7F9FB;
+   }
+
+   
+
+   .login-container input, button{
+    width: 50%;
+    padding: 0 10px;
+    max-width: 350px;
+    height: 35px;
+    font-size: 14px;
+    font-weight: 60; 
+    border: solid 2px #8FC1E3;
+    margin: 3px auto;
+   }
+
+   .edit-button{
+    width: 50%;
+    font-weight: 600;
+    padding: 0 10px;
+    max-width: 350px;
+    font-size: 14px;
+    background-color: #5085A5;
+    border: 2px solid #5085A5;
+    height: 35px;
+    margin: 5px auto 5px 100px;
+    
+   }
+
+   .edit-button:hover {
+    background: #8FC1E3 ;
+    border: 2px solid #5085A5;
+    color: black;
+  }
+
+   /* MISC */
+   .bold {
+     font-weight: 900;
+   }
+
+   .delete-button {
+    background-color: transparent;
+    padding: 0;
+    background-repeat:no-repeat;
+    border: 0;
+    cursor:pointer;
+    overflow: hidden;
+    outline:none;
+    display: flex;
+    flex-direction: row-reverse;
+    width: 30px;
+    height: 20px;
+    margin-right: 0;
+   }
+
+   ::-webkit-scrollbar {
+    width: 10px;
+  }
   
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: transparent; 
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888; 
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }

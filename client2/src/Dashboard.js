@@ -32,22 +32,24 @@ const Dashboard = (props) => {
     }
 
     return (
-        <div className='dashboard-container'>
-            
-            <h1>Welcome back!</h1>
+        <div className="dashboard-whole-container">
+            <p className="dashboard-header">Welcome Back!</p>
+            <p className="dashboard-header">Your Posted Sales:</p>
+            <div className='dashboard-container'>
             {usersSales.length !== 0 ? (usersSales.map((sale) => {
             return (
-              <div className="sale" key={sale.id}>
-                    <button type='button' onClick={() => deleteSale(sale.id)}><span role="img" aria-label="cross">❌</span></button>
-                    <Link to={`/sales/${sale.id}`} props={sale}><button type='button'><span role="img" aria-label="edit">Edit</span></button></Link>
-                  <h3>{sale.address}, {sale.city}, {sale.state} {sale.zip}</h3>
-                  
-                    <p>Date: {moment(sale.date).format("MM-DD-YYYY")}</p>
-                <p>Time: {moment(sale.start_time).format("hh:mmA")} to {moment(sale.end_time).format("hh:mmA")}</p>
-                <p>Description: {sale.description}</p>
+              <div className="dashboard-sale" key={sale.id}>
+                    <button className="delete-button" type='button' onClick={() => deleteSale(sale.id)}><span classname="delete-icon" role="img" aria-label="cross">❌</span></button>
+                    
+                    <p className='dashboard-list-address'>{sale.address}, {sale.city}, {sale.state} {sale.zip}</p>
+                    <p className='dashboard-list-date'><span className='bold'>Date: </span> {moment(sale.date).format("MM-DD-YYYY")} <span className='bold'>&nbsp;&nbsp;&nbsp;&nbsp;Time: </span> {moment(sale.start_time).format("hh:mmA")} to {moment(sale.end_time).format("hh:mmA")}</p>
+                    <p className='dashboard-list-time'></p>
+                    <p className='dashboard-list-description'>{sale.description}</p>
+                    <Link to={`/sales/${sale.id}`} props={sale}><button className="edit-button" type='button'>Edit</button></Link>
                     {/* <button onClick={this.incrementMe}></button> */}
               </div>
             )})) : <p>You have no posted yard sales.</p>}
+            </div>
         </div>
     )
 }

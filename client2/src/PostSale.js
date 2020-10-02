@@ -151,7 +151,7 @@ export default class PostSale extends Component {
                         <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat"/>
                         <label for="vehicle3"> Paypal</label> */}
                     <input className="description-window" type="textarea" name="description" placeholder="Enter a brief description of items being sold or any important info" value={this.state.description} onChange={this.handleChange} required />
-                    <button type="submit">{this.props.match.params.id ? "Update Info" : "Post A Sale!"}</button>
+                    <button className="post-sale-button" type="submit">{this.props.match.params.id ? "Update Info" : "Post A Sale!"}</button>
                         </form>
                         </LoadScript>
             </div>
