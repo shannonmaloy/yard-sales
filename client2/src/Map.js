@@ -7,7 +7,7 @@ const Map = (props) => {
   
   const mapRef = useRef(null);
   
-  const libraries = ["geometry"]
+  
   let salesData = []
   if (props.dataProps.filteredSales) {
     salesData = props.dataProps.filteredSales

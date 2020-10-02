@@ -97,8 +97,14 @@ export default class FindASale extends Component {
         
     }
 
-    panToMarker() {
-        
+    panToMarker(lat, lng) {
+        console.log("CLICK", lat, lng)
+        this.setState({
+            center: {
+                lat: parseFloat(lat),
+                lng: parseFloat(lng),
+            }
+        })
     }
 
     render() {
@@ -116,9 +122,9 @@ export default class FindASale extends Component {
                             <input className="search-bar-radius" type="number" name="searchRadius" placeholder="Distance (m)" value={this.state.searchRadius} onChange={this.handleChange} min={1} required/>
                     <button className="search-bar-submit" type="submit">Search</button>
                 </form></div>
-                <div className="map-container">{this.state.filteredSales ? (<Map dataProps={this.state}/>) : (this.state.allSales ? (<Map dataProps={this.state}/>) : (<p>Loading Google Map</p>))}</div>
+                    <div className="map-container">{this.state.filteredSales ? (<Map dataProps={this.state} />) : (this.state.allSales ? (<Map dataProps={this.state} />) : (<p>Loading Google Map</p>))}</div>
 
-                <div className="sales-list-container">{<Sales dataProps={this.state}/>}</div>
+                <div className="sales-list-container">{<Sales dataProps={this.state} panTo={this.panToMarker}/>}</div>
             </LoadScript>
             </div>
         )
