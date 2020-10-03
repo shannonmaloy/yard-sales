@@ -8,7 +8,6 @@ import Header from "./Header"
 import Footer from "./Footer"
 import PostSale from "./PostSale"
 import FindSales from "./FindSales"
-import Registration from './auth/Registration';
 import './App.css'
 
 console.log(process.env.REACT_APP_GOOGLE_MAPS_API_KEY)

@@ -2,7 +2,7 @@ import React, { Component} from 'react'
 import Sales from "./Sales"
 import Map from "./Map"
 import axios from 'axios'
-import {Autocomplete, LoadScript} from '@react-google-maps/api'
+import {LoadScript} from '@react-google-maps/api'
 export default class FindASale extends Component {
     
     constructor(props) {

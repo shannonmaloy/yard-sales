@@ -39,7 +39,7 @@ const Dashboard = (props) => {
             {usersSales.length !== 0 ? (usersSales.map((sale) => {
             return (
               <div className="dashboard-sale" key={sale.id}>
-                    <button className="delete-button" type='button' onClick={() => deleteSale(sale.id)}><span classname="delete-icon" role="img" aria-label="cross">❌</span></button>
+                    <button className="delete-button" type='button' onClick={() => deleteSale(sale.id)}><span className="delete-icon" role="img" aria-label="cross">❌</span></button>
                     
                     <p className='dashboard-list-address'>{sale.address}, {sale.city}, {sale.state} {sale.zip}</p>
                     <p className='dashboard-list-date'><span className='bold'>Date: </span> {moment(sale.date).format("MM-DD-YYYY")} </p>
