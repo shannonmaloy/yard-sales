@@ -5,10 +5,10 @@ const Sales = (props) => {
   //Sorts the Sales list by date then by start time
   let salesData = null
   if (props.dataProps.filteredSales) {
-    salesData = props.dataProps.filteredSales.sort((a,b) => (a.date > b.date) ? 1 : (a.date === b.date) ? ((a.start_time > b.start_time) ? 1 : -1) : -1)
+    salesData = props.dataProps.filteredSales.sort((a,b) => (a.date > b.date) ? 1 : (a.date === b.date) ? ((a.start_time > b.start_time) ? 1 : (a.start_time === b.start_time) ? ((a.id > b.id) ? 1 : -1) : -1) : -1)
     console.log(salesData)
   } else if (props.dataProps.allSales) {
-    salesData = props.dataProps.allSales.sort((a,b) => (a.date > b.date) ? 1 : (a.date === b.date) ? ((a.start_time > b.start_time) ? 1 : -1) : -1)
+    salesData = props.dataProps.allSales.sort((a,b) => (a.date > b.date) ? 1 : (a.date === b.date) ? ((a.start_time > b.start_time) ? 1 : (a.start_time === b.start_time) ? ((a.id > b.id) ? 1 : -1) : -1) : -1)
     console.log(salesData)
   }
   

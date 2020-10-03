@@ -548,7 +548,7 @@
    }
 
    .dashboard-container>div {
-    flex: 0 45%;
+    flex: 0 30%;
     
     box-sizing:border-box
   }
@@ -610,6 +610,28 @@
      font-size: 1.6em;
    }
 
+   .dashboard-edit {
+     display: flex;
+     margin: 0 auto;
+     justify-content: center;
+     text-decoration: none;
+   }
+
+   .edit-button{
+    font-weight: 600;
+    padding: 0 10px;
+    width: 60%;
+    font-size: 14px;
+    background-color: #5085A5;
+    border: 2px solid #5085A5;
+    height: 35px;
+   }
+
+   .edit-button:hover {
+    background: #8FC1E3 ;
+    border: 2px solid #5085A5;
+    color: black;
+  }
    
 
    .login-container input, button{
@@ -623,24 +645,7 @@
     margin: 3px auto;
    }
 
-   .edit-button{
-    width: 50%;
-    font-weight: 600;
-    padding: 0 10px;
-    max-width: 350px;
-    font-size: 14px;
-    background-color: #5085A5;
-    border: 2px solid #5085A5;
-    height: 35px;
-    margin: 5px auto 5px 100px;
-    
-   }
-
-   .edit-button:hover {
-    background: #8FC1E3 ;
-    border: 2px solid #5085A5;
-    color: black;
-  }
+   
 
    /* MISC */
    .bold {

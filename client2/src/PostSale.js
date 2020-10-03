@@ -41,8 +41,8 @@ export default class PostSale extends Component {
                     state: res.data.sale.state,
                     zip: res.data.sale.zip,
                     date: res.data.sale.date,
-                    start_time: res.data.sale.start_time,
-                    end_time: res.data.sale.end_time,
+                    start_time: moment(res.data.sale.start_time).utcOffset(res.data.sale.start_time).format("HH:mm"),
+                    end_time: moment(res.data.sale.end_time).utcOffset(res.data.sale.end_time).format("HH:mm"),
                     description: res.data.sale.description,
                 } )
             }).catch(err => {
