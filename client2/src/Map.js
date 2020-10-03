@@ -128,7 +128,7 @@ const Map = (props) => {
                   <p className="sale-window-address1">{selectedSale.address}</p>
                   <p className="sale-window-address2">{selectedSale.city}, {selectedSale.state} {selectedSale.zip}</p>
                   <p className="sale-window-date"><span className="bold">Date:</span> {moment(selectedSale.date).format("MM-DD-YYYY")} </p>
-                  <p className="sale-window-time"><span className="bold">Time: </span>{moment(selectedSale.start_time).format("hh:mmA")} to {moment(selectedSale.end_time).format("hh:mmA")}</p>
+                  <p className="sale-window-time"><span className="bold">Time: </span>{moment(selectedSale.start_time).utcOffset(selectedSale.start_time).format("hh:mmA")} to {moment(selectedSale.end_time).utcOffset(selectedSale.start_time).format("hh:mmA")}</p>
                   <p className="sale-window-description">{selectedSale.description}</p>
                 </div>
               </InfoWindow>)}

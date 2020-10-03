@@ -487,7 +487,7 @@
   }
 
   .post-sale-container form {
-   width: 40%;
+   width: 70%;
    color: #F7F9FB;
    text-align: center;
    display: flex;
@@ -505,9 +505,10 @@
   }
 
   .post-sale-container input, button{
-    width: 50%;
+    
+    width: 80%;
     padding: 0 10px;
-    max-width: 350px;
+    max-width: 550px;
     height: 35px;
     font-size: 14px;
     font-weight: 60; 
