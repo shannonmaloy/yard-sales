@@ -9,7 +9,7 @@ import Footer from "./Footer"
 import PostSale from "./PostSale"
 import FindSales from "./FindSales"
 import './App.css'
-
+require("dotenv").config({ path: "../.env" });
 console.log(process.env.REACT_APP_GOOGLE_MAPS_API_KEY)
 
 export default class App extends Component {

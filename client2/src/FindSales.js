@@ -2,7 +2,9 @@ import React, { Component} from 'react'
 import Sales from "./Sales"
 import Map from "./Map"
 import axios from 'axios'
-import {LoadScript} from '@react-google-maps/api'
+import { LoadScript } from '@react-google-maps/api'
+
+const libraries = ["places"]
 export default class FindASale extends Component {
     
     constructor(props) {
@@ -91,10 +93,7 @@ export default class FindASale extends Component {
         }) 
     }
     
-    componentDidMount() {
-        this.getData()
-        
-    }
+    
 
     panToMarker(lat, lng) {
         console.log("CLICK", lat, lng)
@@ -106,14 +105,33 @@ export default class FindASale extends Component {
         })
     }
 
+    saveToProfile = () => {
+        fetch(`/api/user/stats/${this.state.currentId}`, {
+            method: 'POST',
+        })
+        .then(res => res.json())
+        .then(res => {
+            this.setState({
+                fireRedirect: true,
+                redirectPath: '/user/profile'
+            })
+            this.getUserSelected();
+        }).catch(err => console.log(err))
+    }
+
+    componentDidMount() {
+        this.getData()
+        
+    }
+
     render() {
       
         
         return (
             <div className="find-sales-container">
                 <LoadScript
-                libraries = {["places"]}
-                googleMapsApiKey="AIzaSyCXK1LZV_v4jMsN0dqc4ooplYep9-lT64g"
+                libraries = {libraries}
+                googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}
             >
                 <div className="search-bar-container">
                 <form className="search-bar-form" onSubmit={this.handleSubmit}>

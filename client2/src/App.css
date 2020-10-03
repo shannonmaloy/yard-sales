@@ -212,6 +212,7 @@
      padding: 5px 20px;
      margin: 5px 15px;
      background-color: #8FC1E3;
+     box-shadow: 0 1px 2px rgba(0,0,0,.2)
    }
 
    .sale-list-address1 {
@@ -539,7 +540,7 @@
 
    .dashboard-container {
     font-family: 'Montserrat', sans-serif;
-     
+    min-height: 400px;
      justify-content: center;
      width: 100%;
      background-color: #F7F9FB;
@@ -560,6 +561,7 @@
      margin: 5px 15px;
      background-color: #8FC1E3;
      width: 100%;
+     box-shadow: 0 1px 2px rgba(0,0,0,.2)
    }
 
    .dashboard-list-address {
@@ -625,6 +627,7 @@
     background-color: #5085A5;
     border: 2px solid #5085A5;
     height: 35px;
+    box-shadow: 0 1px 2px rgba(0,0,0,.2)
    }
 
    .edit-button:hover {
@@ -648,6 +651,11 @@
    
 
    /* MISC */
+
+   button, input{
+    box-shadow: 0 1px 2px rgba(0,0,0,.2)
+   }
+
    .bold {
      font-weight: 900;
    }
@@ -665,6 +673,7 @@
     width: 30px;
     height: 20px;
     margin-right: 0;
+    box-shadow: none;
    }
 
    ::-webkit-scrollbar {

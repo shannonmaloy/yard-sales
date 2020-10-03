@@ -1,6 +1,7 @@
 import React, {useState, useRef, useEffect} from "react" 
-import { GoogleMap, useGoogleMap, useLoadScript, Marker, InfoWindow, MarkerClusterer} from "@react-google-maps/api"
+import { GoogleMap, useLoadScript, Marker, InfoWindow, MarkerClusterer} from "@react-google-maps/api"
 import moment from 'moment'
+require("dotenv").config({ path: "../.env" })
 
 const Map = (props) => {
   const [selectedSale, setSelectedSale] = useState(null)
@@ -11,9 +12,7 @@ const Map = (props) => {
   if (props.dataProps.filteredSales) {
     salesData = props.dataProps.filteredSales
   } else { salesData = props.dataProps.allSales }
-  console.log("PASS", props)
-  console.log("PASS", props.dataProps.centerChange)
-
+  
   useEffect(() => {
     if (props.dataProps.centerChange){
       mapRef.current.panTo({ lat: props.dataProps.centerChange.lat, lng: props.dataProps.centerChange.lng })
@@ -33,7 +32,7 @@ const Map = (props) => {
   // } 
   //Script to load API key.  API key is URL restricted
   const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: "AIzaSyCXK1LZV_v4jMsN0dqc4ooplYep9-lT64g"
+    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY
   })
   
   if (loadError) return "Error"
@@ -44,13 +43,13 @@ const Map = (props) => {
       This function determines the distance from the users input to each sale then determines 
       if the sale should be mapped...
   */
-  const searchResultsAndFitBoundMap = map => {
+  const searchResultsAndFitBoundMap = () => {
     if (props.dataProps.filteredData){
     const bounds = new window.google.maps.LatLngBounds();
     props.dataProps.filteredData.map(place => {
         bounds.extend({  lat: parseFloat(place.lat), lng: parseFloat(place.lng) })
       })
-      mapRef.current.fitBounds(bounds)
+      return mapRef.current.fitBounds(bounds)
     }
   }
 
@@ -65,7 +64,7 @@ const Map = (props) => {
   //     const newPos = mapRef.current.getBounds().toJSON()
   //     console.log(newPos)
   // }
-  let updated = false
+  
   if (props.dataProps.bounds) {
     mapRef.current.fitBounds(props.dataProps.bounds)
     props.dataProps.bounds = null

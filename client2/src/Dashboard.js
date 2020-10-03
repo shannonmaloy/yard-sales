@@ -41,7 +41,8 @@ const Dashboard = (props) => {
               <div className="dashboard-sale" key={sale.id}>
                     <button className="delete-button" type='button' onClick={() => deleteSale(sale.id)}><span className="delete-icon" role="img" aria-label="cross">❌</span></button>
                     
-                    <p className='dashboard-list-address'>{sale.address}, {sale.city}, {sale.state} {sale.zip}</p>
+                    <p className='dashboard-list-address'>{sale.address}</p>
+                    <p className='dashboard-list-address'>{sale.city}, {sale.state} {sale.zip}</p>
                     <p className='dashboard-list-date'><span className='bold'>Date: </span> {moment(sale.date).format("MM-DD-YYYY")} </p>
                     <p className='dashboard-list-time'><span className='bold'>Time: </span> {moment(sale.start_time).utcOffset(sale.start_time).format("hh:mmA")} to {moment(sale.end_time).utcOffset(sale.start_time).format("hh:mmA")}</p>
                     <p className='dashboard-list-description'>{sale.description}</p>
